@@ -1,0 +1,481 @@
+﻿@{
+    ViewBag.Title = "经销商报告下载";
+}
+@section scripts{
+
+    <script type="text/javascript">
+        var _flag = "@User.Identity.Name.Split('|')[1]";
+        $(function () {
+            $('#report_download').addClass('active');
+
+            switch (_flag) {
+                case "J":
+                    fn_get_groups();
+                    $("#table1").parent().remove();
+                    $("#table2").parent().attr("class", "col-md-9");
+                    $("#table3").parent().attr("class", "col-md-3");
+                    break;
+                case "BA":
+                case "SA":
+                    fn_get_bigAreas();
+                    $("#table2").parent().remove();
+                    $("#table1").parent().attr("class", "col-md-9");
+                    $("#table3").parent().attr("class", "col-md-3");
+                    break;
+                default:
+                    fn_get_groups();
+                    fn_get_bigAreas();
+
+            }
+
+        });
+
+        function fn_get_bigAreas() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetBigAreas", "Home")",
+                async: true,
+                dataType: "json",
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var bigArea = $("#bigArea");
+                    bigArea.empty();
+                    if (data != null && data.length > 1) {
+                        bigArea.removeAttr("disabled");
+                        bigArea.append($('<option value="">全部</option>'));
+                    } else {
+                        bigArea.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.AreaCode).html(this.AreaName);
+                        bigArea.append(opt)
+                    });
+                    bigArea.change();
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        function fn_get_smallAreas() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetSmallArea", "Home")",
+                async: true,
+                dataType: "json",
+                data: { bigAreaCode: $("#bigArea").val() },
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var smallArea = $("#smallArea");
+                    smallArea.empty();
+                    if (data != null && data.length > 1) {
+                        smallArea.removeAttr("disabled");
+                        smallArea.append($('<option value="">全部</option>'));
+                    } else {
+                        smallArea.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.AreaCode).html(this.AreaName);
+                        smallArea.append(opt)
+                    });
+                    smallArea.change();
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                }
+            });
+        }
+
+        function fn_get_groups() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetGroups", "Home")",
+                async: true,
+                dataType: "json",
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var group = $("#group");
+                    group.empty();
+                    if (data != null && data.length > 1) {
+                        group.removeAttr("disabled");
+                        group.append($('<option value="">全部</option>'));
+                    } else {
+                        group.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.GroupCode).html(this.GroupName);
+                        group.append(opt)
+                    });
+                    if (_flag == "J") {
+                        group.change();
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                }
+            });
+        }
+
+        function fn_get_shops() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("getShops", "Home")",
+                async: true,
+                dataType: "json",
+                data: { smallAreaCode: $("#smallArea").val(), groupCode: $("#group").val() },
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var shop = $("#shop");
+                    shop.empty();
+                    if (data != null && data.length > 1) {
+                        shop.removeAttr("disabled");
+                        if ('@ViewBag.RoleType'!= "SP") {
+                            shop.append($('<option value="">全部</option>'));
+                        }
+                    } else {
+                        shop.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.ShopCode).html(this.ShopName);
+                        shop.append(opt)
+                    });
+                    fn_search();
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                }
+            });
+        }
+
+        function fn_search() {
+            $("#table1 tbody").empty();
+            $("#table2 tbody").empty();
+            $("#table3 tbody").empty();
+            switch (_flag) {
+                case "J":
+                    fn_search_report(2);
+                    break;
+                case "BA":
+                case "SA":
+                    fn_search_report(1);
+                    break;
+                default:
+                    fn_search_report(3);
+            }
+        }
+
+        function fn_search_report(index) {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("SearchReportDownShop", "Home")",
+                async: true,
+                dataType: "json",
+                data: { bigAreaCode: $("#bigArea").val(), smallAreaCode: $("#smallArea").val(), groupCode: $("#group").val(), shopCode: $("#shop").val(), code: index },
+                beforeSend: function (XMLHttpRequest) {
+                    $('#load_modal').modal({ backdrop: 'static', keyboard: false });
+                },
+                success: function (data) {
+                    if (data.data1 != null) {
+                        var tbody = $("#table1 tbody");
+                        $(data.data1).each(function (index, item) {
+                            var tr = $("<tr></tr>");
+                            tr.append(fn_get_td(this.BigAreaCode, this.BigAreaCode, this.BigAreaName, false));
+                            tr.append(fn_get_td(this.BigAreaCode + "-" + this.SmallAreaCode, this.SmallAreaCode, this.SmallAreaName, false));
+                            tr.append(fn_get_td(this.BigAreaCode + "-" + this.SmallAreaCode + "-" + this.ShopCode, this.ShopCode, this.ShopName, true, "report-down-shop"));
+                            tbody.append(tr);
+                        });
+                        $("#table1").mergecell(0);
+                        $("#table1").mergecell(1);
+                    }
+                    if (data.data2 != null) {
+                        var tbody = $("#table2 tbody");
+                        $(data.data2).each(function (index, item) {
+                            var tr = $("<tr></tr>");
+                            tr.append(fn_get_td(this.GroupName, this.GroupName, this.GroupName, false));
+                            tr.append(fn_get_td(this.GroupName + "-" + this.ShopCode, this.ShopCode, this.ShopName, true, "report-down-group"));
+                            tbody.append(tr);
+                        });
+                        $("#table2").mergecell(0);
+                    }
+                    if (data.prjects != null) {
+                        var tbody = $("#table3 tbody");
+                        tbody.empty();
+                        $(data.prjects).each(function (index, item) {
+                            var tr = $("<tr></tr>");
+                            tr.append(fn_get_td(this.ProjectCode, this.ProjectCode, this.ProjectName, true, "report-down-project"));
+                            tbody.append(tr);
+                        });
+                        $("#table3").mergecell(0);
+                    }
+                    init_chk_event();
+                    if (_flag == "J") {
+                        var id = "#" + $("#group").val();
+                        fn_checked_def(id);
+                    } else if (_flag == "BA") {
+                        var id = "#" + $("#bigArea").val();
+                        fn_checked_def(id);
+                    } else if (_flag == "SA") {
+                        var id = "#" + $("#bigArea").val() + "-" + $("#smallArea").val();
+                        fn_checked_def(id);
+                    } else if (_flag == "SP") {
+                        var id = "#" + $("#bigArea").val() + "-" + $("#smallArea").val() + "-" + $("#shop").val();
+                        fn_checked_def(id);
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $('#load_modal').modal('hide');
+                }
+            });
+        }
+
+        function fn_checked_def(id) {
+            $(id).attr("checked", "checked");
+            $(id).change();
+        }
+
+        function fn_download_file(code) {
+            var projects = "";
+            $(".report-down-project").filter("input:visible:checkbox:checked").each(function () {
+                projects += $(this).val() + ",";
+            });
+            if (projects.length == 0) {
+                alert("请选择期号");
+                return;
+            }
+
+            var shops = new Array();
+            if (code == 1) {
+                $(".report-down-shop").filter("input:visible:checkbox:checked").each(function () {
+                    shops += $(this).val() + ",";
+                });
+            } else {
+                $(".report-down-group").filter("input:visible:checkbox:checked").each(function () {
+                    shops += $(this).val() + ",";
+                });
+            }
+
+            var form = $('<form style="display:none" method="post" action="@Url.Action("DownloadCheckedFiles", "Home")" ><input type="hidden" id="shops" name="shops" /><input type="hidden" id="projects" name="projects" /></form>');
+
+            form.find("#shops").val(shops);
+            form.find("#projects").val(projects);
+            $("body").append(form); //将表单放置在web中
+            form.submit(); //表单提交
+        }
+
+        function fn_get_td(id, code, name, merge, style) {
+            var tdTemplate = $("<td><input id='' type='checkbox' value=''><label style='font-weight: normal;' for=''></label></td>");
+            tdTemplate.find("input:checkbox").attr({ 'id': id, 'value': code });
+            if (style != null)
+                tdTemplate.find("input:checkbox").attr({ 'class': style });
+            tdTemplate.find("label").attr('for', id);
+            tdTemplate.find("label").html(merge ? (code + " - " + name) : name);
+            return tdTemplate;
+        }
+
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="title_header">
+            <h3>筛选条件</h3>
+        </div>
+        <div class="border_under_title">
+            @if (Request.IsAuthenticated)
+            {
+                if (User.Identity.Name.Split('|')[1] == "J")
+                {
+
+                    <div class="row form-horizontal">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">集团</label>
+                                <div class="col-sm-9">
+                                    <select id="group" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">经销商</label>
+                                <div class="col-sm-9">
+                                    <select id="shop" class="form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-3 col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default btn-block" onclick="fn_search()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (User.Identity.Name.Split('|')[1] == "BA" || User.Identity.Name.Split('|')[1] == "SA")
+                {
+        <!-- No Group -->
+                    <div class="row form-horizontal">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">大区</label>
+                                <div class="col-sm-9">
+                                    <select id="bigArea" class="form-control" onchange="fn_get_smallAreas()">
+                                        <option value="">全国</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">小区</label>
+                                <div class="col-sm-9">
+                                    <select id="smallArea" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">经销商</label>
+                                <div class="col-sm-9">
+                                    <select id="shop" class="form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default btn-block" onclick="fn_search()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+        <!-- Other -->
+                    <div class="row form-horizontal">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">大区</label>
+                                <div class="col-sm-8">
+                                    <select id="bigArea" class="form-control" onchange="fn_get_smallAreas()">
+                                        <option value="">全国</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">小区</label>
+                                <div class="col-sm-8">
+                                    <select id="smallArea" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">集团</label>
+                                <div class="col-sm-8">
+                                    <select id="group" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">经销商</label>
+                                <div class="col-sm-9">
+                                    <select id="shop" class="form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default btn-block" onclick="fn_search()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="title_header">
+            <h3>下载</h3>
+        </div>
+        <div class="border_under_title">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4>区域</h4>
+                        </div>
+                        <div class="col-sm-offset-6 col-sm-2">
+                            <button type="button" class="btn btn-default btn-block btn-sm" onclick="fn_download_file(1)">下载</button>
+                        </div>
+                    </div>
+                    <table id="table1" style="width: 100%;" class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <td>大区</td>
+                                <td>小区</td>
+                                <td>经销商</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4>集团</h4>
+                        </div>
+                        <div class="col-sm-offset-5 col-sm-3">
+                            <button type="button" class="btn btn-default btn-block btn-sm" onclick="fn_download_file(2)">下载</button>
+                        </div>
+                    </div>
+                    <table id="table2" style="width: 100%" class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <td>集团</td>
+                                <td>经销商</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="col-md-3">
+                    <h4>期号</h4>
+
+                    <table id="table3" style="width: 100%" class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <td>期号</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

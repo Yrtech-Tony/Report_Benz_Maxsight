@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "经销商报告下载";
+}
+@section scripts{
+
+    @Scripts.Render("~/bundles/jquerytablefunc");
+
+    <script type="text/javascript">
+        $(function () {
+            $('#report_download').addClass('active');
+            fn_set_data();
+            init_chk_event();
+        });
+
+        function fn_set_data() {
+            //{ code: "area0", name: "大区0", area: [{ code: "0", name: "小区0", distributor: [{ code: "0", name: "经销商0" }] }] }
+            var list = [];
+            for (var i = 0; i < 2; i++) {
+                list.push({ code: "area" + i, name: "大区" + i, children: 8, area: [] });
+            }
+            for (var index = 0; index < list.length; index++) {
+                for (var i = 0; i < 4; i++) {
+                    list[index].area.push({ code: i, name: "小区" + i, distributor: [] });
+                }
+            }
+            for (var index = 0; index < list.length; index++) {
+                for (var i = 0; i < list[index].area.length; i++) {
+                    for (var j = 0; j < 2; j++) {
+                        list[index].area[i].distributor.push({ code: j, name: "经销商" + j });
+                    }
+                }
+            }
+
+            var tbody = $("#table1 tbody");
+            var tdTemplate = "<td><input id='' type='checkbox' value=''><label for=''></label></td>";
+            for (var i = 0; i < list.length; i++) {
+                var item = list[i];
+                var tdA = $(tdTemplate);
+                tdA.attr("rowSpan", item.children);
+                tdA.find("input:checkbox").attr({ 'id': item.code, 'value': item.code });
+                tdA.find("label").attr('for', item.code);
+                tdA.find("label").html(item.name);
+
+                for (var j = 0; j < item.area.length; j++) {
+                    var tdB = $(tdTemplate);
+                    tdB.attr("rowSpan", item.area[j].distributor.length);
+                    tdB.find("input:checkbox").attr({ 'id': item.code + "-" + item.area[j].code, 'value': item.area[j].code });
+                    tdB.find("label").attr('for', item.code + "-" + item.area[j].code);
+                    tdB.find("label").html(item.area[j].name);
+
+                    for (var k = 0; k < item.area[j].distributor.length; k++) {
+                        var distr = item.area[j].distributor[k];
+                        var id = item.code + "-" + item.area[j].code + "-" + distr.code;
+                        var tdC = $(tdTemplate);
+                        tdC.find("input:checkbox").attr({ 'id': id, 'value': distr.code });
+                        tdC.find("label").attr('for', id);
+                        tdC.find("label").html(distr.code);
+                        var tr = $("<tr></tr>");
+                        if (j == 0 && k == 0) {
+                            tr.append(tdA);
+                            tr.append(tdB);
+                        } else if (k == 0) {
+                            tr.append(tdB);
+                        }
+                        tr.append(tdC);
+                        tr.append("<td><label>" + distr.name + "</label></td>");
+                        tbody.append(tr);
+                    }
+                }
+            }
+        }
+
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="page-header"><strong>经销商报告下载</strong></h3>
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">大区</label>
+            <div class="col-sm-9">
+                <select class="form-control">
+                    <option>全国</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">小区</label>
+            <div class="col-sm-9">
+                <select class="form-control">
+                    <option>东区</option>
+                    <option>西区</option>
+                    <option>南区</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">省份</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="省份">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">城市</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="城市">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">车型</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="车型">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-offset-3 col-md-3">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-default btn-block">查询</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary btn-block">下载</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>区域</h4>
+            <table id="table1" style="width: 100%" class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td>大区</td>
+                        <td>小区</td>
+                        <td>经销商代码</td>
+                        <td>经销商名称</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h4>集团</h4>
+            <table id="table2" style="width: 100%" class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td>集团</td>
+                        <td>经销商代码</td>
+                        <td>经销商名称</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <h4>期号</h4>
+            <table id="table3" style="width: 100%" class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td>期号代码</td>
+                        <td>期号名称</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>

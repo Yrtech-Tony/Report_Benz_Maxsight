@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "首页";
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#home').addClass('active');
+            fn_search_charter();
+        });
+        function fn_search_charter() {
+
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("SearchCharters", "Home")",
+                async: false,
+                dataType: "json",
+                beforeSend: function (XMLHttpRequest) {
+                    $('#load_modal').modal({ backdrop: 'static', keyboard: false });
+                },
+                success: function (data) {
+                    var tab = $('#tabs_charters');
+                    tab.empty();
+                    if (data != null) {
+                        $(data).each(function (index, item) {
+                            var li = $('<li role="presentation" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" ><a href="#tab_panel_check" aria-controls="tab_panel_check" role="tab" data-toggle="tab"></a></li>');
+                            li.find("a").attr("value", this.CharterCode).html(this.CharterName);
+                            tab.append(li);
+                        });
+                        $('#tabs_charters a').click(function (e) {
+                            e.preventDefault()
+                            $(this).tab('show');
+                            var code = $(this).attr("value");
+                            fn_search_shop_subject_score(code);
+                        });
+                        $('#tabs_charters a:first').tab('show');
+                        $('#tabs_charters a:first').click();
+                        $("#table_check").show();
+                    } else {
+                        $("#table_check").hide();
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $('#load_modal').modal('hide');
+                }
+            });
+        }
+
+        function fn_search_shop_subject_score(code) {
+            var tbody = $("#table_check tbody");
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("SearchSubjectCharter", "Home")",
+                async: true,
+                dataType: "json",
+                data: { projectCode: "@ViewBag.ProjectCode", charterCode: code },
+                success: function (data) {
+                    tbody.empty();
+                    $(data).each(function (index, item) {
+                        var tr = $("<tr></tr>");
+                        tr.append($("<td style='text-align: center;'>" + this.SubjectCode + "</td>"));
+                        tr.append($("<td>" + this.CheckPoint + "</td>"));
+                        tbody.append(tr);
+                    });
+                    //$('body').scrollTop($('body')[0].scrollHeight);
+                },
+                error: function () {
+                    tbody.empty();
+                }
+            });
+        }
+    </script>
+}
+<div class="jumbotron" style="padding:3px;">
+    <h2 class="text-center">@ViewBag.CurrentYear 年梅赛德斯-迈巴赫销售质量现场考核</h2>
+    <p class="lead text-center">第 @ViewBag.ForNo 季度经销商报告</p>
+</div>
+
+
+<div class="row" style=" margin-left: 3px;margin-right: 2px;">
+    <!-- Nav tabs -->
+    <ul id="tabs_main" class="mytabs" role="tablist">
+        <li role="presentation" class="active"><a href="#tab_panel_main_1" aria-controls="tab_panel_main_1" role="tab" data-toggle="tab">项目背景</a></li>
+        <li role="presentation"><a href="#tab_panel_main_2" aria-controls="tab_panel_main_2" role="tab" data-toggle="tab">指标体系</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content border_under_title">
+        <div role="tabpanel" class="tab-pane active" id="tab_panel_main_1">
+
+            <div class=" title">
+                <h3>项目简介</h3>
+            </div>
+
+            <div class="content_under_title">
+                <p>梅赛德斯-迈巴赫向来致力于为每一位顾客提供卓越的销售服务体验。为达成这个目标，需要每一位经销商员工的行为遵守与梅赛德斯-迈巴赫品牌定位相符的服务标准。</p>
+                <p>为了帮助经销商更好的提高销售服务质量，确保始终如一的优质客户服务，梅赛德斯-迈巴赫决定在全国范围对经销商进行销售质量现场考核。所有梅赛德斯-迈巴赫尊享中心授权经销商2016年四个季度分别接受一次现场考核，现场到访日期将提前一周以邮件形式通知经销商。</p>
+                <p>本次报告是针对2016年第一季度现场考核情况作出的总结，其目的：对梅赛德斯-迈巴赫经销商的销售流程、销售技巧和产品知识进行考核和监控</p>
+            </div>
+            <div class=" title">
+                <h3>项目考察内容</h3>
+            </div>
+            <div class="content_under_title">
+                <p>以下为明采重点销售流程步骤：</p>
+                <center><img src="~/Images/2.png" alt="明采重点销售流程步骤" style="width:60%"></center>
+            </div>
+            <div class=" title">
+                <h3>项目考察对象</h3>
+            </div>
+
+            <div class="content_under_title">
+                <p>梅赛德斯-迈巴赫尊享中心授权经销商。每季度检查一次，每次入店检查时间为1天。</p>
+            </div>
+            <div class=" title">
+                <h3>调查范围</h3>
+            </div>
+            <div>
+                <table id="table_areas" style="width: 100%;text-align:center" class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <td width="10%">区域</td>
+                            <td>所含省份</td>
+                            <td width="10%">经销商数量</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>E1</td>
+                            <td>上海市，江苏省</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>E2</td>
+                            <td>安徽省，浙江省</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>N1</td>
+                            <td>北京市，天津市</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>N2</td>
+                            <td>河南省，山东省，山西省</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>N3</td>
+                            <td>河北省，黑龙江省，吉林省，辽宁省，内蒙古自治区</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td>S1</td>
+                            <td>福建省，广东省</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td>S2</td>
+                            <td>广东省，广西壮族自治区，湖南省，江西省</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>W</td>
+                            <td>甘肃省，贵州省，湖北省，陕西省，四川省，云南省，重庆市</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">合计</td>
+                            <td>77</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class=" title">
+                <h3>项目状态</h3>
+            </div>
+            <div>
+                <table id="table_status" style="width: 100%;text-align:center" class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <td width="25%">当前月份/季度</td>
+                            <td width="25%">开始日期</td>
+                            <td width="25%">结束日期</td>
+                            <td width="25%">当前日期</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="25%">@ViewBag.CurrentYear</td>
+                            <td width="25%">@ViewBag.StartDate</td>
+                            <td width="25%">@ViewBag.EndDate</td>
+                            <td width="25%">@DateTime.Now.ToString("yyyy-MM-dd")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab_panel_main_2">
+            <div class=" title">
+                <h3>概况</h3>
+            </div>
+            <div class="content_under_title">
+                <ul>
+                    <li>
+                        <strong>本报告中的“是”代表对该问题所述内容的肯定，“否”即否定，“/”表示该指标不涉及。其中，“否”用红色字体标注，需要重点关注并改善。</strong>
+                    </li>
+                    <li>
+                        <strong>经销商得分计算方法：</strong>
+                        <ul>
+                            <ui>
+                                <li>经销商总体得分=Σ环节执行率*环节权重-必备类考察项失分</li>
+                                <li>环节执行率=环节内指标总得分/环节指标总分值*100%</li>
+                                <li>指标得分=（流程模拟演示考核得分+人员访谈问答考核得分+文件检核拍照得分）/3</li>
+                                <li>如果某指标只涉及一种考察方式，则该指标得分为该种考察方式得分</li>
+                            </ui>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>@ViewBag.CurrentYear年明采项目中设置必备类考察项，会对经销商的总得分产生影响；但经销商能够取得的最高得分为100%，最低总得分为0%。</strong>
+                        <ul>
+                            <ui>
+                                <li>必备类考察项：在未达到该指标要求时，总得分会进行相应分数的扣减；问卷中已经详细标注具体的必备类考察项指标及影响</li>
+                                <li>非必备考察项不参与得分计算</li>
+                            </ui>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>试乘试驾车与展车考核</strong>
+                        <ul>
+                            <ui>
+                                <li>若经销商店内展车或试驾车二者缺一，则该样本最终得分不高于75%（即当经销商该样本实际得分高于75%时，成绩记为75%；当经销商该样本实际得分低于75%，以实际成绩为准。</li>
+                                <li>若经销商即无梅赛德斯-迈巴赫专属试乘试驾车，又无展车，所有指标不参与考核，经销商最终得分为0%</li>
+                            </ui>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class=" title">
+                <h3>环节指标</h3>
+            </div>
+            <div>
+                <!-- Nav tabs -->
+                <ul id="tabs_charters" class="mytabs" role="tablist"></ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab_panel_check">
+                        <table id="table_check" style="width: 100%;" class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <td width="10%">体系号</td>
+                                    <td>检查点</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

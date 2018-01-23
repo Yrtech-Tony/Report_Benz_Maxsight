@@ -1,0 +1,464 @@
+﻿@{
+    ViewBag.Title = "经销商报告";
+}
+@section scripts{
+
+    @Scripts.Render("~/bundles/highcharts");
+
+    <script type="text/javascript">
+        function fn_GetSignList() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("ConvertToSWF","Home")",
+                async: false,
+                dataType: "json",
+                data: {},
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    alert("success");
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+
+        $(function () {
+
+            $('#distributor').addClass('active');
+
+            $('#point1container').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: '各月各期总得分',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: null,
+                    x: -20
+                },
+                xAxis: {
+                    title: {
+                        text: '期数'
+                    },
+                    categories: [],
+                    allowDecimals: false,
+                    plotLines: [{
+                        value: 0,
+                        width: 0,
+                        color: '#808080'
+                    }]
+                },
+                yAxis: {
+                    title: {
+                        text: '分数'
+                    },
+                    min: 0,
+                    max: 100,
+                    tickInterval: 20,
+                    allowDecimals: false,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ' 分',
+                    shared: false
+                },
+                legend: {
+                    layout: 'vertical',//horizontal，vertical
+                    align: 'right',
+                    floating: false,
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true, //显示每条曲线每个节点的数据项的值
+                            inside: true,
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    },
+                    line: {
+                        dataLabels: {
+                            enabled: false
+                        }
+                    },
+                    spline: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    },
+                    areaspline: {
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+
+            $('#point2container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Q4总体与环节得分'
+                }, xAxis: {
+                    title: {
+                        text: null
+                    },
+                    categories: [],
+                    allowDecimals: false,
+                    plotLines: [{
+                        value: 0,
+                        width: 0,
+                        color: '#808080'
+                    }]
+                },
+                yAxis: {
+                    title: {
+                        text: '分数'
+                    },
+                    min: 0,
+                    max: 100,
+                    tickInterval: 10,
+                    allowDecimals: false,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ' 分',
+                    shared: false
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true,
+                            inside:true,
+                            align: 'left',
+                            verticalAlign: 'middle'
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',//horizontal，vertical
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+
+            $('#point3container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '到店接待'
+                }, xAxis: {
+                    title: {
+                        text: null
+                    },
+                    categories: [],
+                    allowDecimals: false,
+                    plotLines: [{
+                        value: 0,
+                        width: 0,
+                        color: '#808080'
+                    }]
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    },
+                    min: 0,
+                    max: 100,
+                    tickInterval: 10,
+                    allowDecimals: false,
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ' 分',
+                    shared: false
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true,
+                            inside: true,
+                            align: 'left',
+                            verticalAlign: 'middle'
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',//horizontal，vertical
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+
+            fn_setChart1Data();
+            fn_setChart2Data();
+            fn_setChart3Data();
+            $('#myTabs a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show');
+                var title = $(this).html();
+                var chart3 = $('#point3container').highcharts();
+                chart3.setTitle({
+                    text: title
+                });
+            })
+        });
+
+        function fn_setChart1Data() {
+            var chart1 = $('#point1container').highcharts();
+            chart1.xAxis[0].setCategories(['YTD', 'Q1[第1期]', 'Q2[第2期]', 'Q3[第3期]', 'Q4[第4期]']);
+            chart1.addSeries({
+                name: '得分',
+                type: 'column',
+                color: '#7CB5EC',
+                marker: {
+                    symbol: 'circle'//点形状
+                },
+                data: [0, 70, 68, 99, 57]
+            }, true, true);
+            chart1.addSeries({
+                name: 'E1',
+                type: 'line',
+                color: '#90ED7D',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [null, 87, 76, 56, 88]
+            }, true, true);
+            chart1.addSeries({
+                name: '全国',
+                type: 'line',
+                color: '#ED561B',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [null, 34, 87, 66, 99]
+            }, true, true);
+        }
+
+        function fn_setChart2Data() {
+            var chart2 = $('#point2container').highcharts();
+            chart2.xAxis[0].setCategories(['总得分', '到店接待', '需求分析和展车介绍', '试乘试驾', '报价议价', '人员和设施', '潜在客户跟进']);
+            chart2.addSeries({
+                name: "得分",
+                data: [88.8, 82.5, 86.2, 76.5, 86.5, 72.2, 80.3]
+            }, true, true);
+
+            chart2.addSeries({
+                name: '宝马',
+                type: 'line',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [89.8, 87.5, 87.2, 78.5, 88.5, 71.2, 80.3]
+            }, true, true);
+            chart2.addSeries({
+                name: '奔驰',
+                type: 'line',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [68.8, 72.5, 66.2, 76.5, 56.5, 62.2, 90.3]
+            }, true, true);
+            chart2.addSeries({
+                name: '雷克萨斯',
+                type: 'line',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [28.8, 62.5, 76.2, 46.5, 36.5, 42.2, 50.3]
+            }, true, true);
+        }
+
+        function fn_setChart3Data() {
+            var chart3 = $('#point3container').highcharts();
+            chart3.xAxis[0].setCategories(['总得分', '到店接待', '需求分析和展车介绍', '试乘试驾', '报价议价', '人员和设施', '潜在客户跟进']);
+            chart3.addSeries({
+                name: "得分",
+                data: [88.8, 82.5, 86.2, 76.5, 86.5, 72.2, 80.3]
+            }, true, true);
+
+            chart3.addSeries({
+                name: '宝马',
+                type: 'line',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [89.8, 87.5, 87.2, 78.5, 88.5, 71.2, 80.3]
+            }, true, true);
+            chart3.addSeries({
+                name: '奔驰',
+                type: 'line',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [68.8, 72.5, 66.2, 76.5, 56.5, 62.2, 90.3]
+            }, true, true);
+            chart3.addSeries({
+                name: '雷克萨斯',
+                type: 'line',
+                marker: {
+                    symbol: 'circle'
+                },
+                data: [28.8, 62.5, 76.2, 46.5, 36.5, 42.2, 50.3]
+            }, true, true);
+        }
+
+    </script>
+}
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="page-header"><strong>经销商</strong></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <select class="form-control">
+            <option>全国</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control">
+            <option>东区</option>
+            <option>西区</option>
+            <option>南区</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control">
+            <option>E1</option>
+            <option>E2</option>
+            <option>E3</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control">
+            <option>常熟中升之星</option>
+            <option>常州之星</option>
+            <option>丹阳之星</option>
+            <option>淮安之星</option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="page-header"><strong>总体情况</strong> <small>2015年Q1报告</small></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-unstyled">
+            <li>
+                <h5 style="font-weight:bold">各月、各期总得分</h5>
+                <ul>
+                    <li>
+                        <p>
+                            Q4总得分为87.4%，高于全国10.0%，低于所在区域。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Q4总得分为87.4%，高于全国10.0%，低于所在区域。
+                        </p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div id="point1container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-unstyled">
+            <li>
+                <h5 style="font-weight:bold">Q4总体与环节得分</h5>
+                <ul>
+                    <li>
+                        <strong>Q4总得分为87.4%。</strong>
+                    </li>
+                    <li>
+                        <strong>Q4高于总得分的环节为：</strong>
+                        <ul>
+                            <ui>
+                                到店接待, 需求分析和展车介绍, 试乘试驾, 报价议价, 人员和设施, 潜在客户跟进
+                            </ui>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Q4低于总得分的环节为：</strong>
+                        <ul>
+                            <ui>
+                                需求分析和展车介绍
+                            </ui>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div id="point2container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!-- Nav tabs -->
+    <ul id="myTabs" class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">到店接待</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="home" role="tab" data-toggle="tab">需求分析和展车介绍</a></li>
+        <li role="presentation"><a href="#messages" aria-controls="home" role="tab" data-toggle="tab">试乘试驾</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="home" role="tab" data-toggle="tab">报价议价</a></li>
+        <li role="presentation"><a href="#settings1" aria-controls="home" role="tab" data-toggle="tab">人员和设施</a></li>
+        <li role="presentation"><a href="#settings2" aria-controls="home" role="tab" data-toggle="tab">潜在客户跟进</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div id="point3container"></div>
+        </div>
+    </div>
+</div>

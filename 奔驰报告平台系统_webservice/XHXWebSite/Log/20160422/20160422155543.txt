@@ -1,0 +1,9 @@
+System.Data.OleDb.OleDbException: [DBNETLIB][ConnectionOpen (Connect()).]SQL Server 不存在或拒绝访问。
+   在 System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   在 System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup)
+   在 System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   在 System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   在 System.Data.OleDb.OleDbConnection.Open()
+   在 CommonHandler.query(String sql) 位置 d:\D盘\workspace\项目整理\进行中的项目\Source\PC程序\奔驰报告平台系统_webservice - 副本\XHXWebSite\App_Code\CommonHandler.cs:行号 64 
+exec [Upload_ShopSubjectScore_S] 'MB1601','ESXR20','I5','1','','2','admin'��算','admin'

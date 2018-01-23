@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "首页";
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#home').addClass('active');
+        });
+    </script>    
+}
+<div class="jumbotron">
+    <h2 class="text-center">@ViewBag.CurrentYear年梅赛德斯-奔驰销售明采调研</h2>
+    <p class="lead text-center">第 @ViewBag.ForNo 季度经销商报告</p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-header"><strong>项目简介</strong></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+       <p>梅赛德斯-奔驰一致致力于为每一位顾客提供卓越的销售服务体验。为达成这个目标，需要每一位经销商员工的行为遵守与梅赛德斯-奔驰品牌定位相符的服务标准。</p>
+        <p>为了帮助经销商更好的提高销售服务质量，确保始终如一的优质客户服务，梅赛德斯-奔驰决定在全国范围对经销商进行明采调研。所有梅赛德斯-奔驰授权经销商2016年第三季度、第四季度分别接受一次明采访问，明采到访日期将提前一周以邮件形式通知经销商。</p>
+        <p>本次报告是针对2016年第 @ViewBag.ForNo 季度调研情况作出的总结，其目的在于：1、加强对梅赛德斯-奔驰授权经销商销售流程和产品知识进行监控和考核。</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-header"><strong>项目考察内容</strong></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>以下为明采重点销售流程步骤：</p>
+        <center><img src="~/Images/1.png" alt="明采重点销售流程步骤" style="width:80%" ></center>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-header"><strong>项目考察对象</strong></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>梅赛德斯-奔驰中心授权经销商。每季度检查一次，每次入店检查时间为1天。</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-header"><strong>报告阅读说明</strong></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ol>
+            <li>
+                <strong>本报告中的“是”代表对该问题所述内容的肯定，“否”即否定，“/”表示该指标不涉及。其中，“否”用红色字体标注，需要重点关注并改善。</strong>
+                <ul>
+                    <ui id="sixty_l">
+
+                    </ui>
+                </ul>
+            </li>
+            <li>
+                <strong>经销商得分计算方法：</strong>
+                <ul>
+                    <ui>
+                        <li>经销商总体得分=Σ环节执行率*环节权重-必备类考察项失分</li>
+                        <li>环节执行率=环节内指标总得分/环节指标总分值*100%</li>
+                        <li>指标得分=（流程模拟演示考核得分+人员访谈问答考核得分+文件检核拍照得分）/3</li>
+                        <li>如果某指标只涉及一种考察方式，则该指标得分为该种考察方式得分</li>
+                        <li>流程演示和人员访谈问答涉及多名销售顾问参与考核，其得分为全部参与考核销售顾问得分的平均分</li>
+                        <li>被抽取销售顾问不在场，又无任何合理证据证明，总成绩减5%</li>
+                    </ui>
+                </ul>
+            </li>
+            <li>
+                <strong>销售顾问得分计算方法：</strong>
+                <ul>
+                    <ui>
+                        <li>按照销售顾问流程演示指标所对应的各环节权重计算出该销售顾问总体执行率，并转化为百分制</li>
+                        <li>参与考核的销售顾问中有一位执行率低于60%，该人员成绩不计入经销商当次明采成绩中；若有多于一位不合格，执行率最低的销售顾问成绩豁免，其他销售顾问成绩正常计算</li>
+                    </ui>
+                </ul>
+            </li>
+            <li>
+                <strong>文件检核拍照得分计算方法：</strong>
+                <ul>
+                    <ui>
+                        <li>按照文件检核拍照指标对应的各环节权重计算出该经销商文件检核拍照执行率，并转化为百分制</li>
+                    </ui>
+                </ul>
+            </li>
+            <li>
+                <strong>2015年明采项目中设置必备类考察项，会对经销商的总得分产生影响；但经销商能够取得的最高得分为100%，最低总得分为0%。</strong>
+                <ul>
+                    <ui>
+                        <li>必备类考察项：在未达到该指标要求时，总得分会进行相应分数的扣减；问卷中已经详细标注具体的必备类考察项指标及影响</li>
+                        <li>非必备考察项不参与得分计算</li>
+                    </ui>
+                </ul>
+            </li>
+            <li>
+                <strong>计分体系如下表：</strong>
+                <ul>
+                    <ui>
+                        <li style="list-style-type:none;"><center><img src="~/Images/1-2.png" alt="明采重点销售流程步骤" style="width:auto"></center></li>
+                    </ui>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="encrypt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pinpai" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="qihao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="yonghuming" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="encryptResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="encryptResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchProject">
+        <s:complexType />
+      </s:element>
+      <s:element name="SearchProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchProjectResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUserRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUserRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUserRoleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBigArea">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBigAreaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchBigAreaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchSmallArea">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bigAreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchSmallAreaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchSmallAreaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchGroupResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchShop">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="smallAreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="groupCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchShopResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchShopResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchReportDownShop">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bigAreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="smallAreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="province" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="carType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchReportDownShopResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchReportDownShopResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="encryptSoapIn">
+    <wsdl:part name="parameters" element="tns:encrypt" />
+  </wsdl:message>
+  <wsdl:message name="encryptSoapOut">
+    <wsdl:part name="parameters" element="tns:encryptResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchProject" />
+  </wsdl:message>
+  <wsdl:message name="SearchProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUserRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUserRole" />
+  </wsdl:message>
+  <wsdl:message name="SearchUserRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUserRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchBigAreaSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchBigArea" />
+  </wsdl:message>
+  <wsdl:message name="SearchBigAreaSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchBigAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSmallAreaSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchSmallArea" />
+  </wsdl:message>
+  <wsdl:message name="SearchSmallAreaSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchSmallAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchGroup" />
+  </wsdl:message>
+  <wsdl:message name="SearchGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchShopSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchShop" />
+  </wsdl:message>
+  <wsdl:message name="SearchShopSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchShopResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchReportDownShopSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchReportDownShop" />
+  </wsdl:message>
+  <wsdl:message name="SearchReportDownShopSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchReportDownShopResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="encrypt">
+      <wsdl:input message="tns:encryptSoapIn" />
+      <wsdl:output message="tns:encryptSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchProject">
+      <wsdl:input message="tns:SearchProjectSoapIn" />
+      <wsdl:output message="tns:SearchProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserRole">
+      <wsdl:input message="tns:SearchUserRoleSoapIn" />
+      <wsdl:output message="tns:SearchUserRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBigArea">
+      <wsdl:input message="tns:SearchBigAreaSoapIn" />
+      <wsdl:output message="tns:SearchBigAreaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchSmallArea">
+      <wsdl:input message="tns:SearchSmallAreaSoapIn" />
+      <wsdl:output message="tns:SearchSmallAreaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchGroup">
+      <wsdl:input message="tns:SearchGroupSoapIn" />
+      <wsdl:output message="tns:SearchGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchShop">
+      <wsdl:input message="tns:SearchShopSoapIn" />
+      <wsdl:output message="tns:SearchShopSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchReportDownShop">
+      <wsdl:input message="tns:SearchReportDownShopSoapIn" />
+      <wsdl:output message="tns:SearchReportDownShopSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="encrypt">
+      <soap:operation soapAction="http://tempuri.org/encrypt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchProject">
+      <soap:operation soapAction="http://tempuri.org/SearchProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserRole">
+      <soap:operation soapAction="http://tempuri.org/SearchUserRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBigArea">
+      <soap:operation soapAction="http://tempuri.org/SearchBigArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchSmallArea">
+      <soap:operation soapAction="http://tempuri.org/SearchSmallArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchGroup">
+      <soap:operation soapAction="http://tempuri.org/SearchGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchShop">
+      <soap:operation soapAction="http://tempuri.org/SearchShop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchReportDownShop">
+      <soap:operation soapAction="http://tempuri.org/SearchReportDownShop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="encrypt">
+      <soap12:operation soapAction="http://tempuri.org/encrypt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchProject">
+      <soap12:operation soapAction="http://tempuri.org/SearchProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserRole">
+      <soap12:operation soapAction="http://tempuri.org/SearchUserRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBigArea">
+      <soap12:operation soapAction="http://tempuri.org/SearchBigArea" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchSmallArea">
+      <soap12:operation soapAction="http://tempuri.org/SearchSmallArea" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchGroup">
+      <soap12:operation soapAction="http://tempuri.org/SearchGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchShop">
+      <soap12:operation soapAction="http://tempuri.org/SearchShop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchReportDownShop">
+      <soap12:operation soapAction="http://tempuri.org/SearchReportDownShop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://123.57.229.128/BENZReportServer/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://123.57.229.128/BENZReportServer/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
