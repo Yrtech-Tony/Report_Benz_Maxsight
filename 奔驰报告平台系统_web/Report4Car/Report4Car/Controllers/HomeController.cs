@@ -84,16 +84,18 @@ namespace Report4Car.Controllers
                     id = string.IsNullOrEmpty(user.Remark) ? "" : user.Remark.Split('|')[0];
                 }
                 ViewBag.AreaCode = id;
+                ProjectDto project = service.SearchProjectByProjectCode(user.ProjectCode);
                 string type = user.ProjectCode.Substring(0, 3);
                 ViewBag.ProjectCode = user.ProjectCode;
-                if (type.ToUpper() == "MBH")
-                {
-                    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(3));
-                }
-                else
-                {//MB
-                    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(2));
-                }
+                ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", project.Quarter);
+                //if (type.ToUpper() == "MBH")
+                //{
+                //    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(3));
+                //}
+                //else
+                //{//MB
+                //    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(2));
+                //}
             }
             return View();
         }
@@ -120,16 +122,23 @@ namespace Report4Car.Controllers
                 {
                     ViewBag.ShopInfo = string.Format("{0} > {1} > {2} {3}", dt.Rows[0]["BigAreaName"], dt.Rows[0]["SmallAreaName"], dt.Rows[0]["ShopCode"], dt.Rows[0]["ShopName"]);
                 }
+                ProjectDto project = service.SearchProjectByProjectCode(user.ProjectCode);
                 string type = user.ProjectCode.Substring(0, 3);
+
                 ViewBag.ProjectCode = user.ProjectCode;
-                if (type.ToUpper() == "MBH")
-                {
-                    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(3));
-                }
-                else
-                {//MB
-                    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(2));
-                }
+                ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", project.Quarter);
+                //if (type.ToUpper() == "VAN")
+                //{
+                //    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", project.Quarter);
+                //}
+                //else if (type.ToUpper() == "MBH")
+                //{
+                //    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(3));
+                //}
+                //else
+                //{//MB
+                //    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", user.ProjectCode.Substring(2));
+                //}
             }
             return View();
         }
@@ -567,7 +576,7 @@ namespace Report4Car.Controllers
                 }
                 else if (projectCode.ToUpper().Contains("VAN"))
                 {
-                     projectCodeFile = "20" + projectCode.Substring(3, 2) + "Q" + projectCode.Substring(6, 1);
+                    projectCodeFile = "20" + projectCode.Substring(3, 2) + "Q" + projectCode.Substring(6, 1);
                 }
                 foreach (string shopCode in fileNames)
                 {
@@ -595,7 +604,7 @@ namespace Report4Car.Controllers
                     string file8_downLoad = Path.Combine(folderToZip + @"\" + projectCode, projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_星徽产品大使_综合报告" + ".xlsx");
                     string file9_downLoad = Path.Combine(folderToZip + @"\" + projectCode, projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx");
                     string file10_downLoad = Path.Combine(folderToZip + @"\" + projectCode, projectCodeFile + " 梅赛德斯-迈巴赫销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx");
-                                                                                                       
+
                     if (System.IO.File.Exists(file0_downLoad))
                     {
                         System.IO.File.Delete(file0_downLoad);
@@ -690,7 +699,7 @@ namespace Report4Car.Controllers
                     { }
                     try
                     {
-                        
+
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + "-1 V级及威霆销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx",
                                   file6_downLoad);
                     }
@@ -698,7 +707,7 @@ namespace Report4Car.Controllers
                     { }
                     try
                     {
-                        
+
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + "-2 V级及威霆销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx",
                                   file7_downLoad);
                     }
@@ -707,7 +716,7 @@ namespace Report4Car.Controllers
 
                     try
                     {
-                        
+
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_星徽产品大使_综合报告" + ".xlsx",
                                   file8_downLoad);
                     }
