@@ -54,7 +54,7 @@ public class CommonHandler
     public static DataSet query(string sql)
     {
         DataSet ds = new DataSet(); //创建dataSet对象 
-        string ConnectionString = "Provider=sqloledb;Data Source=123.57.229.128;Initial Catalog=BENZ_Report;user id=sa;pwd=mxT1@mfb;";
+        string ConnectionString = "Provider=sqloledb;Data Source=.;Initial Catalog=BENZ_Report;user id=sa;pwd=mxT1@mfb;";
         using (OleDbConnection conn = new OleDbConnection(ConnectionString))
         {
             using (OleDbDataAdapter da = new OleDbDataAdapter(sql, conn))

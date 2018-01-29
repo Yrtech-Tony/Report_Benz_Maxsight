@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "XHXWebSite", "XHXWebSite\", "{5F9AE2EC-A736-4982-B734-4133CCDF9DB0}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFramework = "3.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/XHXWebSite"
 		Debug.AspNetCompiler.PhysicalPath = "XHXWebSite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\XHXWebSite\"
