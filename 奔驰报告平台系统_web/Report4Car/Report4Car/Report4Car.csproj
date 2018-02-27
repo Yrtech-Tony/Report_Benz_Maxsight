@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aliyun.OpenServices">
-      <HintPath>..\..\..\广汽丰田\Lib\Aliyun.OpenServices.dll</HintPath>
+      <HintPath>..\Lib\Aliyun.OpenServices.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
