@@ -134,7 +134,7 @@
                     shop.empty();
                     if (data != null && data.length > 1) {
                         shop.removeAttr("disabled");
-                        if ('@ViewBag.RoleType'!= "SP") {
+                        if ('@ViewBag.RoleType' != "SP") {
                             shop.append($('<option value="">全部</option>'));
                         }
                     } else {
@@ -247,7 +247,6 @@
                 alert("请选择期号");
                 return;
             }
-
             var shops = new Array();
             if (code == 1) {
                 $(".report-down-shop").filter("input:visible:checkbox:checked").each(function () {
@@ -259,12 +258,30 @@
                 });
             }
 
-            var form = $('<form style="display:none" method="post" action="@Url.Action("DownloadCheckedFiles", "Home")" ><input type="hidden" id="shops" name="shops" /><input type="hidden" id="projects" name="projects" /></form>');
+            @*var form = $('<form style="display:none" method="post" action="@Url.Action("DownloadCheckedFiles", "Home")" ><input type="hidden" id="shops" name="shops" /><input type="hidden" id="projects" name="projects" /></form>');
 
             form.find("#shops").val(shops);
             form.find("#projects").val(projects);
             $("body").append(form); //将表单放置在web中
-            form.submit(); //表单提交
+            form.submit();*@ //表单提交
+
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("DownloadCheckedFiles", "Home")",
+                async: true,
+                dataType: "json",
+                data: { shops: shops, projects: projects },
+                beforeSend: function (XMLHttpRequest) {
+                    $('#load_modal').modal({ backdrop: 'static', keyboard: false });
+                },
+                success: function (data) {
+                    window.location.href = "/Home/DownloadFile?fileName=" + data.ExportPath;
+                    //fn_search();
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $('#load_modal').modal('hide');
+                }
+            });
         }
 
         function fn_get_td(id, code, name, merge, style) {

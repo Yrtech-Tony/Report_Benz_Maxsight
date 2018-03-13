@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text;
 using XHX.Common;
 
 namespace Report4Car.Controllers
@@ -21,7 +22,37 @@ namespace Report4Car.Controllers
     {
         public ReportService service = new ReportService();
         private Dictionary<string, TreeNode> dicTemp = new Dictionary<string, TreeNode>();
-
+        public static void log(string message)
+        {
+            string appDomainPath = AppDomain.CurrentDomain.BaseDirectory;
+            string fileName = appDomainPath + @"\" + "Log" + @"\" + DateTime.Now.ToString("yyyyMMdd") + @"\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+            //File.Create(fileName);
+            if (!Directory.Exists(appDomainPath + @"\" + "Log"))
+            {
+                Directory.CreateDirectory(appDomainPath + @"\" + "Log");
+            }
+            if (!Directory.Exists(appDomainPath + @"\" + "Log" + @"\" + DateTime.Now.ToString("yyyyMMdd")))
+            {
+                Directory.CreateDirectory(appDomainPath + @"\" + "Log" + @"\" + DateTime.Now.ToString("yyyyMMdd"));
+            }
+            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                byte[] by = WriteStringToByte(message, fs);
+                fs.Flush();
+            }
+        }
+        /// <summary>
+        /// 日志写入文档的方法
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="fs"></param>
+        /// <returns></returns>
+        public static byte[] WriteStringToByte(string str, FileStream fs)
+        {
+            byte[] info = new UTF8Encoding(true).GetBytes(str);
+            fs.Write(info, 0, info.Length);
+            return info;
+        }
         #region View
         /// <summary>
         /// 首页区分是迈巴赫还是奔驰，根据不同的品牌显示不同 的信息
@@ -480,6 +511,12 @@ namespace Report4Car.Controllers
                 return null;
             return Json(charter);
         }
+        public ActionResult DownloadFile(string fileName)
+        {
+            string contentType = "application/x-msdownload";
+            string downloadFileName = Path.GetFileName(fileName);
+            return this.File(fileName, contentType, downloadFileName);
+        }
         /// <summary>
         /// 查询环节下体系的情况
         /// </summary>
@@ -520,6 +557,7 @@ namespace Report4Car.Controllers
         [HttpPost]
         public ActionResult DownloadCheckedFiles(string shops, string projects)
         {
+
             if (string.IsNullOrEmpty(shops) || string.IsNullOrEmpty(projects))
                 return null;
             if (shops.LastIndexOf(',') == shops.Length - 1)
@@ -528,24 +566,38 @@ namespace Report4Car.Controllers
                 projects = projects.Remove(projects.Length - 1);
 
             List<string> shopList = shops.Split(',').ToList<string>();
+            string temp = "";
             List<string> projectList = projects.Split(',').ToList<string>();
-
-            string reportPath = HttpContext.Server.MapPath("~/ReportFiles");
-            string temp = Path.Combine(reportPath, "TEMP\\temp.zip");
-            ZipInForFiles(shopList, projectList, reportPath, temp, 9);
-            Stream stream = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            byte[] bytes = new byte[(int)stream.Length];
-            stream.Position = 0;
-            stream.Read(bytes, 0, bytes.Length);
-            stream.Close();
-            string contentType = "application/octet-stream";
-            System.IO.File.Delete(temp);
-            string zipName = string.Empty;
-            foreach (string item in projectList)
+            try
             {
-                zipName += item + "_";
+                string reportPath = HttpContext.Server.MapPath("~/ReportFiles");
+                //temp = Path.Combine(reportPath, "TEMP\\temp.zip");
+                temp = Path.Combine(reportPath, "TEMP\\"+ DateTime.Now.ToString("yyyyMMddHHmmss")+".zip");
+
+
+                ZipInForFiles(shopList, projectList, reportPath, temp, 9);
             }
-            return this.File(bytes, contentType, Url.Encode(Path.GetFileName(zipName + "Report.zip")));
+            catch (Exception ex)
+            {
+                log(ex.ToString());
+            }
+
+            //Stream stream = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+            //byte[] bytes = new byte[(int)stream.Length];
+            //stream.Position = 0;
+            //stream.Read(bytes, 0, bytes.Length);
+            //stream.Close();
+            //string contentType = "application/octet-stream";
+            //System.IO.File.Delete(temp);
+            //string zipName = string.Empty;
+            //foreach (string item in projectList)
+            //{
+            //    zipName += item + "_";
+            //}
+            return Json(new { ExportPath = temp });
+            //return this.File(bytes, contentType, Url.Encode(Path.GetFileName(zipName + "Report.zip")));
+
         }
 
         #region File Zip
@@ -655,64 +707,92 @@ namespace Report4Car.Controllers
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + shopCode + ".xlsx",
                                   file0_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex0)
+                    {
+                        if (!ex0.Message.ToString().Contains("exist"))
+                        {
+                            log(ex0.Message.ToString());
+                        }
+                    }
                     try
                     {
                         //下载MB或者MBH第一个文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_单店报告" + ".xlsx",
                                   file1_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex1)
+                    {
+                        if (!ex1.Message.ToString().Contains("exist"))
+                        {
+                            log(ex1.Message.ToString());
+                        }
+                    }
                     try
                     {
                         //下载MB或者MBH第二个文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_星徽产品大使_单店报告" + ".xlsx",
                                   file2_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex2)
+                    {
+                        if (!ex2.Message.ToString().Contains("exist"))
+                        { log(ex2.Message.ToString()); }
+                    }
                     try
                     {
                         //下载Van第一个文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + "-1 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_V级及威霆_单店报告" + ".xlsx",
                                   file3_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex3)
+                    {
+                        if (!ex3.Message.ToString().Contains("exist"))
+                        { log(ex3.Message.ToString()); }
+                    }
                     try
                     {
                         //下载Van第二个文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + "-2 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_V级及威霆_单店报告" + ".xlsx",
                                   file4_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex4)
+                    {
+                        if (!ex4.Message.ToString().Contains("exist"))
+                        { log(ex4.Message.ToString()); }
+                    }
                     try
                     {
                         //下载迈巴赫文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-迈巴赫销售质量现场考核_" + shopCode + "_" + shopName + "_单店报告" + ".xlsx",
                                   file5_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex5)
+                    {
+                        if (!ex5.Message.ToString().Contains("exist"))
+                        { log(ex5.Message.ToString()); }
+                    }
                     try
                     {
 
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + "-1 V级及威霆销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx",
                                   file6_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex6)
+                    {
+                        if (!ex6.Message.ToString().Contains("exist"))
+                        { log(ex6.Message.ToString()); }
+                    }
                     try
                     {
 
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + "-2 V级及威霆销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx",
                                   file7_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex7)
+                    {
+                        if (!ex7.Message.ToString().Contains("exist"))
+                        { log(ex7.Message.ToString()); }
+                    }
 
                     try
                     {
@@ -720,24 +800,33 @@ namespace Report4Car.Controllers
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_星徽产品大使_综合报告" + ".xlsx",
                                   file8_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex8)
+                    {
+                        if (!ex8.Message.ToString().Contains("exist"))
+                        { log(ex8.Message.ToString()); }
+                    }
                     try
                     {
                         //下载MB或者MBH第一个文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-奔驰销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx",
                                   file9_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex9)
+                    {
+                        if (!ex9.Message.ToString().Contains("exist"))
+                        { log(ex9.Message.ToString()); }
+                    }
                     try
                     {
                         //下载迈巴赫文件
                         aliyun.GetObject("yrtech", "BENZReport" + @"/" + projectCode + @"/" + projectCodeFile + " 梅赛德斯-迈巴赫销售质量现场考核_" + shopCode + "_" + shopName + "_综合报告" + ".xlsx",
                                   file10_downLoad);
                     }
-                    catch
-                    { }
+                    catch (Exception ex10)
+                    {
+                        if (!ex10.Message.ToString().Contains("exist"))
+                        { log(ex10.Message.ToString()); }
+                    }
                 }
             }
             bool isSuccess = true;
