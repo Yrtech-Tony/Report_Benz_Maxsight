@@ -3347,6 +3347,41 @@ public class Service : System.Web.Services.WebService
         return CommonHandler.query(sql);
     }
     #endregion
+    #region 经销商录音管理
+    #region 经销商录音设置
+    [WebMethod]
+    public void SaveShopRecordUrl(string projectCode, string shopCode, string recordUrl, string password, string userId)
+    {
+        string sql = string.Format("EXEC ShopRecord_S '{0}','{1}','{2}','{3}','{4}'",
+                                   projectCode, shopCode, recordUrl, password, userId);
+        CommonHandler.query(sql);
+    }
+    [WebMethod]
+    public DataSet SearchShopRecordUrlList(string projectCode, string shopCode)
+    {
+        string sql = string.Format("EXEC ShopRecord_R '{0}','{1}'",
+                                   projectCode, shopCode);
+       return CommonHandler.query(sql);
+    }
+    #endregion
+    #region 经销商录音下载
+    [WebMethod]
+    public DataSet SearchShopRecord_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
+                                  string groupName, string carType, string projectCode)
+    {
+        string sql = string.Format("exec [ShopRecordByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        return CommonHandler.query(sql);
+    }
+    [WebMethod]
+    public DataSet SearchShopRecord_Group(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
+                                    string groupName, string carType, string projectCode)
+    {
+        string sql = string.Format("exec [ShopRecordByGroup_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        return CommonHandler.query(sql);
+    }
+    #endregion
+
+    #endregion
     #region 解密
     [WebMethod]
     public string DecryptString(string encryptString)
@@ -3465,6 +3500,7 @@ public class Service : System.Web.Services.WebService
         CommonHandler.query(sql);
     }
     #endregion
+   
     private List<ShopDto> Report_SearchShop(string projectCode)
     {
         List<ShopDto> list = new List<ShopDto>();
