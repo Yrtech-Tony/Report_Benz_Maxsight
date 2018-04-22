@@ -183,7 +183,16 @@ namespace Report4Car.Controllers
             ViewBag.RoleType = (Session["user"] as User).Role;
             return View();
         }
-
+        /// <summary>
+        /// 经销商报告下载
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ShopRecord()
+        {
+            ViewBag.TreeNode = getTreeviewData();
+            ViewBag.RoleType = (Session["user"] as User).Role;
+            return View();
+        }
         #endregion
 
         #region Treeview
@@ -334,6 +343,43 @@ namespace Report4Car.Controllers
             return null;
         }
         #endregion
+        /// <summary>
+        /// 查询录音下载列表
+        /// </summary>
+        /// <param name="groupCode"></param>
+        /// <param name="bigAreaCode"></param>
+        /// <param name="smallAreaCode"></param>
+        /// <param name="shopCode"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SearchShopRecord(string groupCode, string bigAreaCode, string smallAreaCode, string shopCode, int code)
+        {
+            if (Session["user"] != null)
+            {
+                User user = Session["user"] as User;
+                DataTable dt1 = null, dt2 = null;
+                switch (code)
+                {
+                    case 1:
+                        dt1 = service.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
+                        break;
+                    case 2:
+                        dt2 = service.SearchShopRecord_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
+                        break;
+                    case 3:
+                        dt1 = service.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
+                        //dt2 = service.SearchShopRecord_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
+                        break;
+                }
+                DataTable dt = service.GetProjects((Session["user"] as User).Year, (Session["user"] as User).ProjectCode);
+                object dic = DT2Obj.ToObj(dt);
+                object dic1 = DT2Obj.ToObj(dt1);
+                object dic2 = DT2Obj.ToObj(dt2);
+                return Json(new { data1 = dic1, data2 = dic2, prjects = dic });
+            }
+            return null;
+        }
         /// <summary>
         /// 查询经销商报告列表信息
         /// </summary>

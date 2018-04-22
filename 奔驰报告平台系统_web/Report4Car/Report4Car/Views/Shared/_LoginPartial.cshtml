@@ -10,6 +10,7 @@
         }
         <li id="distributor">@Html.ActionLink("经销商报告", "DistributorReport", "Home")</li>
         <li id="report_download">@Html.ActionLink("经销商报告下载", "ReportDownload", "Home")</li>
+        <li id="shop_record">@Html.ActionLink("经销商录音下载", "ShopRecord", "Home")</li>
     </ul>
 
     using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

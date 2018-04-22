@@ -45,8 +45,8 @@ namespace Report4Car.Controllers
                 try
                 {
                     ReportService service = new ReportService();
-                    string role = service.GetUserRole(model.UserName, "VAN170401");
-                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "VAN170401", Year = "2017" };
+                    string role = service.GetUserRole(model.UserName, "MB1703");
+                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "MB1703", Year = "2017" };
                     FormsAuthentication.SetAuthCookie(model.UserName + "|" + role, true, "");
                     if (Request.QueryString["ReturnUrl"] != null)
                         //跳转到登录前页面

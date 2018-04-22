@@ -230,7 +230,7 @@
     <Content Include="Service References\BENZReportServer\Report4Car.BENZReportServer.ProjectDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Service References\BENZReportServer\Service1.disco" />
+    <None Include="Service References\BENZReportServer\Service.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -253,8 +253,9 @@
     <Content Include="Views\Account\LoginError.cshtml" />
     <Content Include="Views\Home\AreaReport.cshtml" />
     <Content Include="Views\Home\Index - copy.cshtml" />
-    <None Include="Service References\BENZReportServer\Service1.wsdl" />
     <Content Include="Views\Home\Index3.cshtml" />
+    <None Include="Service References\BENZReportServer\Service.wsdl" />
+    <Content Include="Views\Home\ShopRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
