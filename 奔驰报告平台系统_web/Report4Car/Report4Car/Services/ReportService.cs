@@ -142,28 +142,9 @@ namespace Report4Car.Services
         /// <param name="carType"></param>
         /// <param name="projectCode"></param>
         /// <returns></returns>
-        public DataTable SearchShopRecord_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode)
+        public DataTable SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode)
         {
             DataSet ds = client.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode);
-            if (ds.Tables.Count > 0)
-                return ds.Tables[0];
-            return null;
-        }
-        /// <summary>
-        /// 根据集团来查询经销商录音列表
-        /// </summary>
-        /// <param name="bigAreaCode"></param>
-        /// <param name="smallAreaCode"></param>
-        /// <param name="shopCode"></param>
-        /// <param name="province"></param>
-        /// <param name="city"></param>
-        /// <param name="groupCode"></param>
-        /// <param name="carType"></param>
-        /// <param name="projectCode"></param>
-        /// <returns></returns>
-        public DataTable SearchShopRecord_Group(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode)
-        {
-            DataSet ds = client.SearchShopRecord_Group(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode);
             if (ds.Tables.Count > 0)
                 return ds.Tables[0];
             return null;

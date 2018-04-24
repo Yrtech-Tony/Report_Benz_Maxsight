@@ -358,25 +358,10 @@ namespace Report4Car.Controllers
             if (Session["user"] != null)
             {
                 User user = Session["user"] as User;
-                DataTable dt1 = null, dt2 = null;
-                switch (code)
-                {
-                    case 1:
-                        dt1 = service.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
-                        break;
-                    case 2:
-                        dt2 = service.SearchShopRecord_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
-                        break;
-                    case 3:
-                        dt1 = service.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
-                        //dt2 = service.SearchShopRecord_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
-                        break;
-                }
-                DataTable dt = service.GetProjects((Session["user"] as User).Year, (Session["user"] as User).ProjectCode);
-                object dic = DT2Obj.ToObj(dt);
+                DataTable dt1 = null;
+                dt1 = service.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
                 object dic1 = DT2Obj.ToObj(dt1);
-                object dic2 = DT2Obj.ToObj(dt2);
-                return Json(new { data1 = dic1, data2 = dic2, prjects = dic });
+                return Json(new { data1 = dic1 });
             }
             return null;
         }
@@ -618,7 +603,7 @@ namespace Report4Car.Controllers
             {
                 string reportPath = HttpContext.Server.MapPath("~/ReportFiles");
                 //temp = Path.Combine(reportPath, "TEMP\\temp.zip");
-                temp = Path.Combine(reportPath, "TEMP\\"+ DateTime.Now.ToString("yyyyMMddHHmmss")+".zip");
+                temp = Path.Combine(reportPath, "TEMP\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".zip");
 
 
                 ZipInForFiles(shopList, projectList, reportPath, temp, 9);
