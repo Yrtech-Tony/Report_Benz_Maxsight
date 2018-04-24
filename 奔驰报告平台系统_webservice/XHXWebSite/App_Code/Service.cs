@@ -3366,17 +3366,10 @@ public class Service : System.Web.Services.WebService
     #endregion
     #region 经销商录音下载
     [WebMethod]
-    public DataSet SearchShopRecord_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
+    public DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
                                   string groupName, string carType, string projectCode)
     {
         string sql = string.Format("exec [ShopRecordByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
-        return CommonHandler.query(sql);
-    }
-    [WebMethod]
-    public DataSet SearchShopRecord_Group(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
-                                    string groupName, string carType, string projectCode)
-    {
-        string sql = string.Format("exec [ShopRecordByGroup_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
         return CommonHandler.query(sql);
     }
     #endregion
