@@ -14,11 +14,7 @@ namespace Report4Car.BENZReportServer {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BENZReportServer.ServiceSoap")]
-    public interface ServiceSoap {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadSalesContantSubjectScore", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId);
+    internal interface ServiceSoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadSalesContantInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -502,17 +498,11 @@ namespace Report4Car.BENZReportServer {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
         System.Data.DataSet SearchShopRecordUrlList(string projectCode, string shopCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchShopRecord_Area", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchShopRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        System.Data.DataSet SearchShopRecord_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchShopRecord_Group", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        System.Data.DataSet SearchShopRecord_Group(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode);
+        System.Data.DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DecryptString", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -567,6 +557,12 @@ namespace Report4Car.BENZReportServer {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
         void UploadAreaSubjectScore(string projectCode, string areaCode, string subjectCode, string score, string inUserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadSalesContantSubjectScore", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
+        void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchProjectNameAndCode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1353,7 +1349,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateForSubject", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateForSubjectRequest {
+    internal partial class SearchScoreRateForSubjectRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -1378,7 +1374,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateForSubjectResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateForSubjectResponse {
+    internal partial class SearchScoreRateForSubjectResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -1396,7 +1392,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchFinallyScoreRate", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchFinallyScoreRateRequest {
+    internal partial class SearchFinallyScoreRateRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -1413,7 +1409,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchFinallyScoreRateResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchFinallyScoreRateResponse {
+    internal partial class SearchFinallyScoreRateResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("ArrayOfDataSet")]
@@ -1432,7 +1428,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchFinallyScoreRateForWeight", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchFinallyScoreRateForWeightRequest {
+    internal partial class SearchFinallyScoreRateForWeightRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -1449,7 +1445,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchFinallyScoreRateForWeightResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchFinallyScoreRateForWeightResponse {
+    internal partial class SearchFinallyScoreRateForWeightResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -1467,7 +1463,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchFinallyScoreRateForOrder", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchFinallyScoreRateForOrderRequest {
+    internal partial class SearchFinallyScoreRateForOrderRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -1484,7 +1480,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchFinallyScoreRateForOrderResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchFinallyScoreRateForOrderResponse {
+    internal partial class SearchFinallyScoreRateForOrderResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -1502,7 +1498,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UploadImgZipFile", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UploadImgZipFileRequest {
+    internal partial class UploadImgZipFileRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string parentDirName;
@@ -1524,7 +1520,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UploadImgZipFileResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UploadImgZipFileResponse {
+    internal partial class UploadImgZipFileResponse {
         
         public UploadImgZipFileResponse() {
         }
@@ -1534,7 +1530,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UploadImgZipFile1", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UploadImgZipFile1Request {
+    internal partial class UploadImgZipFile1Request {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string parentDirName;
@@ -1560,7 +1556,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UploadImgZipFile1Response", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UploadImgZipFile1Response {
+    internal partial class UploadImgZipFile1Response {
         
         public UploadImgZipFile1Response() {
         }
@@ -1570,7 +1566,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetShopReportDto", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetShopReportDtoRequest {
+    internal partial class GetShopReportDtoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -1591,7 +1587,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetShopReportDtoResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetShopReportDtoResponse {
+    internal partial class GetShopReportDtoResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -1609,7 +1605,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="InsertNoticeAttachment", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InsertNoticeAttachmentRequest {
+    internal partial class InsertNoticeAttachmentRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string noticeID;
@@ -1635,7 +1631,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="InsertNoticeAttachmentResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InsertNoticeAttachmentResponse {
+    internal partial class InsertNoticeAttachmentResponse {
         
         public InsertNoticeAttachmentResponse() {
         }
@@ -1645,7 +1641,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="DownNoticeAttachment", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class DownNoticeAttachmentRequest {
+    internal partial class DownNoticeAttachmentRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string noticeID;
@@ -1666,7 +1662,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="DownNoticeAttachmentResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class DownNoticeAttachmentResponse {
+    internal partial class DownNoticeAttachmentResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
@@ -1684,7 +1680,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="InsertSpecialCasePic", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InsertSpecialCasePicRequest {
+    internal partial class InsertSpecialCasePicRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string specialCaseCode;
@@ -1710,7 +1706,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="InsertSpecialCasePicResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InsertSpecialCasePicResponse {
+    internal partial class InsertSpecialCasePicResponse {
         
         public InsertSpecialCasePicResponse() {
         }
@@ -1720,7 +1716,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetSpecialCasePic", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetSpecialCasePicRequest {
+    internal partial class GetSpecialCasePicRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string specialCaseCode;
@@ -1741,7 +1737,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetSpecialCasePicResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetSpecialCasePicResponse {
+    internal partial class GetSpecialCasePicResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
@@ -1759,7 +1755,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveExecuteTeamAlter", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveExecuteTeamAlterRequest {
+    internal partial class SaveExecuteTeamAlterRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -1805,7 +1801,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveExecuteTeamAlterResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveExecuteTeamAlterResponse {
+    internal partial class SaveExecuteTeamAlterResponse {
         
         public SaveExecuteTeamAlterResponse() {
         }
@@ -2125,7 +2121,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CharterReport", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class CharterReportRequest {
+    internal partial class CharterReportRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2146,7 +2142,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CharterReportResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class CharterReportResponse {
+    internal partial class CharterReportResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -2164,7 +2160,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="AreaCharterReport", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class AreaCharterReportRequest {
+    internal partial class AreaCharterReportRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2185,7 +2181,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="AreaCharterReportResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class AreaCharterReportResponse {
+    internal partial class AreaCharterReportResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -2203,7 +2199,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswer", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerRequest {
+    internal partial class SaveAnswerRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2265,7 +2261,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerResponse {
+    internal partial class SaveAnswerResponse {
         
         public SaveAnswerResponse() {
         }
@@ -2275,7 +2271,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerDtl2Streampic", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerDtl2StreampicRequest {
+    internal partial class SaveAnswerDtl2StreampicRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string userID;
@@ -2317,7 +2313,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerDtl2StreampicResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerDtl2StreampicResponse {
+    internal partial class SaveAnswerDtl2StreampicResponse {
         
         public SaveAnswerDtl2StreampicResponse() {
         }
@@ -2327,7 +2323,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerDtl2Stream", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerDtl2StreamRequest {
+    internal partial class SaveAnswerDtl2StreamRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2377,7 +2373,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerDtl2StreamResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerDtl2StreamResponse {
+    internal partial class SaveAnswerDtl2StreamResponse {
         
         public SaveAnswerDtl2StreamResponse() {
         }
@@ -2387,7 +2383,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveRecheck", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveRecheckRequest {
+    internal partial class SaveRecheckRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2437,7 +2433,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveRecheckResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveRecheckResponse {
+    internal partial class SaveRecheckResponse {
         
         public SaveRecheckResponse() {
         }
@@ -2447,7 +2443,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchAnswerDtl2Pic", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchAnswerDtl2PicRequest {
+    internal partial class SearchAnswerDtl2PicRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string picName;
@@ -2480,7 +2476,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchAnswerDtl2PicResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchAnswerDtl2PicResponse {
+    internal partial class SearchAnswerDtl2PicResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
@@ -2498,7 +2494,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateRecheckContent", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UpdateRecheckContentRequest {
+    internal partial class UpdateRecheckContentRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2536,7 +2532,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateRecheckContentResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class UpdateRecheckContentResponse {
+    internal partial class UpdateRecheckContentResponse {
         
         public UpdateRecheckContentResponse() {
         }
@@ -2546,7 +2542,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ImportFFV", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class ImportFFVRequest {
+    internal partial class ImportFFVRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
@@ -2572,7 +2568,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ImportFFVResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class ImportFFVResponse {
+    internal partial class ImportFFVResponse {
         
         public ImportFFVResponse() {
         }
@@ -2582,7 +2578,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveFeiJianScore", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveFeiJianScoreRequest {
+    internal partial class SaveFeiJianScoreRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2616,7 +2612,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveFeiJianScoreResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveFeiJianScoreResponse {
+    internal partial class SaveFeiJianScoreResponse {
         
         public SaveFeiJianScoreResponse() {
         }
@@ -2626,7 +2622,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="DeleteScoreSet", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class DeleteScoreSetRequest {
+    internal partial class DeleteScoreSetRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2652,7 +2648,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="DeleteScoreSetResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class DeleteScoreSetResponse {
+    internal partial class DeleteScoreSetResponse {
         
         public DeleteScoreSetResponse() {
         }
@@ -2662,7 +2658,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="InsertScoreSet", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InsertScoreSetRequest {
+    internal partial class InsertScoreSetRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2707,7 +2703,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="InsertScoreSetResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class InsertScoreSetResponse {
+    internal partial class InsertScoreSetResponse {
         
         public InsertScoreSetResponse() {
         }
@@ -2717,7 +2713,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveLossDesc", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveLossDescRequest {
+    internal partial class SaveLossDescRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2763,7 +2759,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveLossDescResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveLossDescResponse {
+    internal partial class SaveLossDescResponse {
         
         public SaveLossDescResponse() {
         }
@@ -2773,7 +2769,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerLog", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerLogRequest {
+    internal partial class SaveAnswerLogRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2815,7 +2811,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveAnswerLogResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveAnswerLogResponse {
+    internal partial class SaveAnswerLogResponse {
         
         public SaveAnswerLogResponse() {
         }
@@ -2825,7 +2821,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveRecheckStatus", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveRecheckStatusRequest {
+    internal partial class SaveRecheckStatusRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2854,7 +2850,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveRecheckStatusResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveRecheckStatusResponse {
+    internal partial class SaveRecheckStatusResponse {
         
         public SaveRecheckStatusResponse() {
         }
@@ -2864,7 +2860,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveShopExamType", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveShopExamTypeRequest {
+    internal partial class SaveShopExamTypeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -2898,7 +2894,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveShopExamTypeResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveShopExamTypeResponse {
+    internal partial class SaveShopExamTypeResponse {
         
         public SaveShopExamTypeResponse() {
         }
@@ -2908,7 +2904,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveSubject", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveSubjectRequest {
+    internal partial class SaveSubjectRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public char statusType;
@@ -3036,7 +3032,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SaveSubjectResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SaveSubjectResponse {
+    internal partial class SaveSubjectResponse {
         
         public SaveSubjectResponse() {
         }
@@ -3046,7 +3042,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRate", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateRequest {
+    internal partial class SearchScoreRateRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -3083,7 +3079,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateResponse {
+    internal partial class SearchScoreRateResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("ArrayOfDataSet")]
@@ -3102,7 +3098,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateForChapter", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateForChapterRequest {
+    internal partial class SearchScoreRateForChapterRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -3131,7 +3127,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateForChapterResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateForChapterResponse {
+    internal partial class SearchScoreRateForChapterResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -3149,7 +3145,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateForLink", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateForLinkRequest {
+    internal partial class SearchScoreRateForLinkRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string projectCode;
@@ -3178,7 +3174,7 @@ namespace Report4Car.BENZReportServer {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchScoreRateForLinkResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class SearchScoreRateForLinkResponse {
+    internal partial class SearchScoreRateForLinkResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("DataSet")]
@@ -3193,12 +3189,12 @@ namespace Report4Car.BENZReportServer {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ServiceSoapChannel : Report4Car.BENZReportServer.ServiceSoap, System.ServiceModel.IClientChannel {
+    internal interface ServiceSoapChannel : Report4Car.BENZReportServer.ServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceSoapClient : System.ServiceModel.ClientBase<Report4Car.BENZReportServer.ServiceSoap>, Report4Car.BENZReportServer.ServiceSoap {
+    internal partial class ServiceSoapClient : System.ServiceModel.ClientBase<Report4Car.BENZReportServer.ServiceSoap>, Report4Car.BENZReportServer.ServiceSoap {
         
         public ServiceSoapClient() {
         }
@@ -3217,10 +3213,6 @@ namespace Report4Car.BENZReportServer {
         
         public ServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId) {
-            base.Channel.UploadSalesContantSubjectScore(projectCode, shopCode, subjectCode, salesType, salesName, score, inUserId);
         }
         
         public void UploadSalesContantInfo(string projectCode, string shopCode, string salesType, string salesName, string score, string mustLoss, int orderNO_all, int orderNO_SmallArea, string inUserId) {
@@ -3775,12 +3767,8 @@ namespace Report4Car.BENZReportServer {
             return base.Channel.SearchShopRecordUrlList(projectCode, shopCode);
         }
         
-        public System.Data.DataSet SearchShopRecord_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode) {
-            return base.Channel.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
-        }
-        
-        public System.Data.DataSet SearchShopRecord_Group(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode) {
-            return base.Channel.SearchShopRecord_Group(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        public System.Data.DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode) {
+            return base.Channel.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
         }
         
         public string DecryptString(string encryptString) {
@@ -3817,6 +3805,10 @@ namespace Report4Car.BENZReportServer {
         
         public void UploadAreaSubjectScore(string projectCode, string areaCode, string subjectCode, string score, string inUserId) {
             base.Channel.UploadAreaSubjectScore(projectCode, areaCode, subjectCode, score, inUserId);
+        }
+        
+        public void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId) {
+            base.Channel.UploadSalesContantSubjectScore(projectCode, shopCode, subjectCode, salesType, salesName, score, inUserId);
         }
         
         public System.Data.DataSet SearchProjectNameAndCode() {

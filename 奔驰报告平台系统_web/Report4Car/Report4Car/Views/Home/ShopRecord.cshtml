@@ -1,0 +1,378 @@
+﻿@{
+    ViewBag.Title = "经销商录音下载";
+}
+@section scripts{
+
+    <script type="text/javascript">
+        var _flag = "@User.Identity.Name.Split('|')[1]";
+        $(function () {
+            $('#shop_record').addClass('active');
+
+            switch (_flag) {
+                case "J":
+                    fn_get_groups();
+                    //$("#table1").parent().remove();
+                    //$("#table2").parent().attr("class", "col-md-9");
+                    //$("#table3").parent().attr("class", "col-md-3");
+                    break;
+                case "BA":
+                case "SA":
+                    fn_get_bigAreas();
+                    //$("#table2").parent().remove();
+                    //$("#table1").parent().attr("class", "col-md-9");
+                    //$("#table3").parent().attr("class", "col-md-3");
+                    break;
+                default:
+                    fn_get_groups();
+                    fn_get_bigAreas();
+
+            }
+
+        });
+
+        function fn_get_bigAreas() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetBigAreas", "Home")",
+                async: true,
+                dataType: "json",
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var bigArea = $("#bigArea");
+                    bigArea.empty();
+                    if (data != null && data.length > 1) {
+                        bigArea.removeAttr("disabled");
+                        bigArea.append($('<option value="">全部</option>'));
+                    } else {
+                        bigArea.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.AreaCode).html(this.AreaName);
+                        bigArea.append(opt)
+                    });
+                    bigArea.change();
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        function fn_get_smallAreas() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetSmallArea", "Home")",
+                async: true,
+                dataType: "json",
+                data: { bigAreaCode: $("#bigArea").val() },
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var smallArea = $("#smallArea");
+                    smallArea.empty();
+                    if (data != null && data.length > 1) {
+                        smallArea.removeAttr("disabled");
+                        smallArea.append($('<option value="">全部</option>'));
+                    } else {
+                        smallArea.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.AreaCode).html(this.AreaName);
+                        smallArea.append(opt)
+                    });
+                    smallArea.change();
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                }
+            });
+        }
+
+        function fn_get_groups() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetGroups", "Home")",
+                async: true,
+                dataType: "json",
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var group = $("#group");
+                    group.empty();
+                    if (data != null && data.length > 1) {
+                        group.removeAttr("disabled");
+                        group.append($('<option value="">全部</option>'));
+                    } else {
+                        group.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.GroupCode).html(this.GroupName);
+                        group.append(opt)
+                    });
+                    if (_flag == "J") {
+                        group.change();
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                }
+            });
+        }
+
+        function fn_get_shops() {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("getShops", "Home")",
+                async: true,
+                dataType: "json",
+                data: { smallAreaCode: $("#smallArea").val(), groupCode: $("#group").val() },
+                beforeSend: function (XMLHttpRequest) {
+                },
+                success: function (data) {
+                    var shop = $("#shop");
+                    shop.empty();
+                    if (data != null && data.length > 1) {
+                        shop.removeAttr("disabled");
+                        if ('@ViewBag.RoleType' != "SP") {
+                            shop.append($('<option value="">全部</option>'));
+                        }
+                    } else {
+                        shop.attr("disabled", "disabled");
+                    }
+                    $(data).each(function (index, item) {
+                        var opt = $("<option></option>");
+                        opt.attr("value", this.ShopCode).html(this.ShopName);
+                        shop.append(opt)
+                    });
+                    fn_search();
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                }
+            });
+        }
+
+        function fn_search() {
+            $("#table1 tbody").empty();
+            //switch (_flag) {
+            //    case "J":
+                    fn_search_report(1);
+                    //break;
+                //case "BA":
+                //case "SA":
+                //    fn_search_report(1);
+                //    break;
+                //default:
+                //    fn_search_report(1);
+            //}
+        }
+
+        function fn_search_report(index) {
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("SearchShopRecord", "Home")",
+                async: true,
+                dataType: "json",
+                data: { bigAreaCode: $("#bigArea").val(), smallAreaCode: $("#smallArea").val(), groupCode: $("#group").val(), shopCode: $("#shop").val(), code: 1 },
+                beforeSend: function (XMLHttpRequest) {
+                    $('#load_modal').modal({ backdrop: 'static', keyboard: false });
+                },
+                success: function (data) {
+                    if (data.data1 != null) {
+                        var tbody = $("#table1 tbody");
+                        $(data.data1).each(function (index, item) {
+                            var tr = $("<tr></tr>");
+                            tr.append($("<td>" + parseInt(parseInt(index) + parseInt(1)) + "</td>"));
+                            tr.append($("<td>" + item.ShopCode + "</td>"));
+                            tr.append($("<td>" + item.ShopName + "</td>"));
+                            tr.append($("<td>" + item.SmallAreaCode + "</td>"));
+                            tr.append($("<td>" + item.BigAreaCode + "</td>"));
+                            tr.append($("<td>" + item.GroupName.split(";")[0] + "</td>"));
+                            if (item.RecordUrl == "" || item.RecordUrl == null) {
+                                tr.append($('<td><a href="' + item.RecordUrl + '">录音未上传</a></td>'));
+                            }
+                            else {
+                                tr.append($('<td><a href="' + item.RecordUrl + '">下载录音</a></td>'));
+                            }
+                            tr.append($("<td>" + item.Password + "</td>"));
+                            tr.find("td").css("text-align: center;");
+                            tbody.append(tr);
+                        });
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    $('#load_modal').modal('hide');
+                }
+            });
+        }
+
+
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="title_header">
+            <h3>筛选条件</h3>
+        </div>
+        <div class="border_under_title">
+            @if (Request.IsAuthenticated)
+            {
+                if (User.Identity.Name.Split('|')[1] == "J")
+                {
+
+                    <div class="row form-horizontal">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">集团</label>
+                                <div class="col-sm-9">
+                                    <select id="group" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">经销商</label>
+                                <div class="col-sm-9">
+                                    <select id="shop" class="form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-3 col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default btn-block" onclick="fn_search()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (User.Identity.Name.Split('|')[1] == "BA" || User.Identity.Name.Split('|')[1] == "SA")
+                {
+        <!-- No Group -->
+                    <div class="row form-horizontal">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">大区</label>
+                                <div class="col-sm-9">
+                                    <select id="bigArea" class="form-control" onchange="fn_get_smallAreas()">
+                                        <option value="">全国</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">小区</label>
+                                <div class="col-sm-9">
+                                    <select id="smallArea" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">经销商</label>
+                                <div class="col-sm-9">
+                                    <select id="shop" class="form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default btn-block" onclick="fn_search()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+        <!-- Other -->
+                    <div class="row form-horizontal">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">大区</label>
+                                <div class="col-sm-8">
+                                    <select id="bigArea" class="form-control" onchange="fn_get_smallAreas()">
+                                        <option value="">全国</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">小区</label>
+                                <div class="col-sm-8">
+                                    <select id="smallArea" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">集团</label>
+                                <div class="col-sm-8">
+                                    <select id="group" class="form-control" onchange="fn_get_shops()">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">经销商</label>
+                                <div class="col-sm-9">
+                                    <select id="shop" class="form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default btn-block" onclick="fn_search()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="title_header">
+            <h3>录音下载</h3>
+        </div>
+        <div class="border_under_title">
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="table1" style="width: 100%;" class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <td>序号</td>
+                                <td>经销商代码</td>
+                                <td>经销商名称</td>
+                                <td>所属小区</td>
+                                <td>所属大区</td>
+                                <td>所属集团</td>
+                                <td>下载</td>
+                                <td>密码</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

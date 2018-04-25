@@ -144,7 +144,7 @@ namespace Report4Car.Services
         /// <returns></returns>
         public DataTable SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode)
         {
-            DataSet ds = client.SearchShopRecord_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode);
+            DataSet ds = client.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode);
             if (ds.Tables.Count > 0)
                 return ds.Tables[0];
             return null;
