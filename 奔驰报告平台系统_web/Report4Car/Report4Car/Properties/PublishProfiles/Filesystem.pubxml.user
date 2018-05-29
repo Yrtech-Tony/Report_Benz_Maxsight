@@ -6,77 +6,77 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\D盘\workspace\项目整理\进行中的项目\Source\PC程序\奔驰报告平台系统_web\Report4Car\发布文件</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Workspace\Report_Benz_Maxsight\奔驰报告平台系统_web\Report4Car\发布文件</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Aliyun.OpenServices.dll">
-      <publishTime>06/26/2014 12:10:34</publishTime>
+      <publishTime>03/12/2018 19:19:12</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>09/12/2015 08:16:43</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>09/12/2015 08:16:33</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/ICSharpCode.SharpZipLib.dll">
-      <publishTime>11/24/2014 16:56:40</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>09/12/2015 08:16:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
-      <publishTime>09/12/2015 08:16:41</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>09/12/2015 08:16:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/Report4Car.dll">
-      <publishTime>12/14/2016 20:15:24</publishTime>
+      <publishTime>04/25/2018 20:31:59</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
-      <publishTime>07/09/2013 11:04:48</publishTime>
+      <publishTime>03/12/2018 19:28:05</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>09/12/2015 08:16:41</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Net.Http.WebRequest.dll">
-      <publishTime>07/09/2013 11:04:48</publishTime>
+      <publishTime>03/12/2018 19:28:04</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>09/12/2015 08:16:42</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>09/12/2015 08:16:42</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>09/12/2015 08:16:41</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>09/12/2015 08:16:43</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.Providers.dll">
-      <publishTime>09/12/2015 08:16:42</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>09/12/2015 08:16:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>09/12/2015 08:16:41</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>09/12/2015 08:16:41</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>09/12/2015 08:16:41</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>09/12/2015 08:16:43</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
-      <publishTime>09/12/2015 08:16:45</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.resources.dll">
       <publishTime>07/09/2013 11:34:42</publishTime>
@@ -85,136 +85,136 @@
       <publishTime>07/09/2013 11:34:40</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Optimization.resources.dll">
-      <publishTime>09/12/2015 08:16:45</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Providers.resources.dll">
-      <publishTime>09/12/2015 08:16:45</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
-      <publishTime>09/12/2015 08:16:43</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
-      <publishTime>09/12/2015 08:16:44</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Content/base.css">
-      <publishTime>10/11/2015 13:49:48</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>09/12/2015 08:20:40</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>09/12/2015 08:20:40</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/cb_h3bg.jpg">
-      <publishTime>10/11/2015 13:46:36</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/su02_tBg.jpg">
-      <publishTime>10/11/2015 14:23:17</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/sub_02tIcon.jpg">
-      <publishTime>10/11/2015 14:23:17</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-black-line.gif">
-      <publishTime>10/04/2015 16:28:46</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-black.gif">
-      <publishTime>10/04/2015 16:28:46</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-default-line.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-default.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-famfamfam-line.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-famfamfam.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-gray-line.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-gray.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-red-line.gif">
-      <publishTime>10/04/2015 16:28:46</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/images/treeview-red.gif">
-      <publishTime>10/04/2015 16:28:47</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/jquery.treeview.css">
-      <publishTime>10/04/2015 16:29:36</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/mc.css">
-      <publishTime>10/11/2015 13:47:51</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/r.css">
-      <publishTime>10/11/2015 13:49:08</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>10/12/2015 18:48:36</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>09/12/2015 11:04:24</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>09/12/2015 10:58:01</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>09/12/2015 10:58:01</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>09/12/2015 10:58:01</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>09/12/2015 10:58:01</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>09/12/2015 08:16:32</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/1-2.png">
-      <publishTime>09/27/2015 15:23:16</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/1.png">
-      <publishTime>09/27/2015 15:10:26</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/2-2.png">
-      <publishTime>09/27/2015 15:31:42</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/2.png">
-      <publishTime>09/27/2015 15:11:10</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/3.png">
-      <publishTime>09/27/2015 15:56:50</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/load.gif">
-      <publishTime>09/29/2015 12:58:27</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="Images/logo.png">
-      <publishTime>09/30/2015 12:04:05</publishTime>
+      <publishTime>02/11/2018 14:21:17</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/12/2015 08:16:45</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
-      <publishTime>09/24/2015 16:33:23</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="ReportFiles/MB03/ECZB23.xlsx">
       <publishTime>09/29/2015 20:01:47</publishTime>
@@ -229,97 +229,103 @@
       <publishTime>09/29/2015 19:43:49</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>09/12/2015 08:19:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>09/12/2015 08:19:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/highcharts.js">
-      <publishTime>09/12/2015 08:19:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.js">
-      <publishTime>09/12/2015 08:16:37</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery.table.func.js">
-      <publishTime>09/24/2015 15:33:31</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery.treeview.js">
-      <publishTime>10/04/2015 16:29:50</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>09/12/2015 08:16:38</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>09/12/2015 08:16:38</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>09/12/2015 08:16:39</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>09/12/2015 08:16:39</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>09/12/2015 08:16:39</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>09/12/2015 10:59:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>09/12/2015 10:59:40</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/04/2015 16:05:47</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Service References/BENZReportServer/Report4Car.BENZReportServer.EncryptResult.datasource">
-      <publishTime>11/22/2016 19:24:36</publishTime>
+      <publishTime>04/25/2018 20:31:43</publishTime>
     </File>
     <File Include="Service References/BENZReportServer/Report4Car.BENZReportServer.PictureDto.datasource">
-      <publishTime>11/22/2016 19:24:36</publishTime>
+      <publishTime>04/25/2018 20:31:43</publishTime>
     </File>
     <File Include="Service References/BENZReportServer/Report4Car.BENZReportServer.ProjectDto.datasource">
-      <publishTime>11/22/2016 19:24:36</publishTime>
+      <publishTime>04/25/2018 20:31:43</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>10/11/2015 17:05:25</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Account/LoginError.cshtml">
-      <publishTime>09/27/2015 16:32:53</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Home/AreaReport.cshtml">
-      <publishTime>11/03/2015 21:35:48</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Home/DistributorReport.cshtml">
-      <publishTime>11/03/2015 21:35:33</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Home/Index - copy.cshtml">
-      <publishTime>03/12/2016 11:23:08</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/19/2016 19:59:53</publishTime>
+      <publishTime>02/12/2018 14:28:12</publishTime>
     </File>
     <File Include="Views/Home/Index2.cshtml">
-      <publishTime>03/19/2016 20:43:28</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
+    </File>
+    <File Include="Views/Home/Index3.cshtml">
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Home/ReportDownload.cshtml">
-      <publishTime>06/16/2016 22:58:29</publishTime>
+      <publishTime>03/12/2018 22:50:03</publishTime>
+    </File>
+    <File Include="Views/Home/ShopRecord.cshtml">
+      <publishTime>04/25/2018 00:35:00</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>09/12/2015 08:16:32</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/04/2015 19:02:47</publishTime>
+      <publishTime>03/12/2018 22:53:35</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>11/04/2015 17:55:31</publishTime>
+      <publishTime>04/25/2018 19:02:01</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>09/12/2015 09:37:48</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>09/12/2015 08:16:32</publishTime>
+      <publishTime>02/11/2018 14:21:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/22/2016 19:55:24</publishTime>
+      <publishTime>04/25/2018 20:32:01</publishTime>
     </File>
   </ItemGroup>
 </Project>

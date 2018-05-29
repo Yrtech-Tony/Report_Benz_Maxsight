@@ -5,7 +5,7 @@
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
-    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
     <CollectionMappings />
@@ -21,8 +21,8 @@
     <MetadataSource Address="http://47.93.118.1/BenzReportServer/Service.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="a4a98deb-2d38-494a-8761-a6896d445137" SourceId="1" SourceUrl="http://47.93.118.1/BenzReportServer/Service.asmx?wsdl" />
-    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="804ad440-d8d8-4b87-a3af-c0c1b0860c3f" SourceId="1" SourceUrl="http://47.93.118.1/BenzReportServer/Service.asmx?disco" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="4a6380e3-4ff0-4ebe-b79d-7637fbccd8a1" SourceId="1" SourceUrl="http://47.93.118.1/BenzReportServer/Service.asmx?wsdl" />
+    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="c47a8617-6e38-403c-baa4-3e48d8f326c9" SourceId="1" SourceUrl="http://47.93.118.1/BenzReportServer/Service.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

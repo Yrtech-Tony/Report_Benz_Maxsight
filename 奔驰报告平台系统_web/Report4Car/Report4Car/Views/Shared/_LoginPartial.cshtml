@@ -6,21 +6,25 @@
         <li id="home">@Html.ActionLink("项目介绍", "Index", "Home")</li>
         @if (User.Identity.Name.Split('|')[1] != "SP")
         {
-        <li id="area">@Html.ActionLink("区域报告", "AreaReport", "Home")</li>
+            <li id="area">@Html.ActionLink("区域报告", "AreaReport", "Home")</li>
         }
         <li id="distributor">@Html.ActionLink("经销商报告", "DistributorReport", "Home")</li>
         <li id="report_download">@Html.ActionLink("经销商报告下载", "ReportDownload", "Home")</li>
+        @if (User.Identity.Name.Split('|')[2].Substring(0,3) == "MB1") // 只有MB的时候才显示这个菜单
+        {
+            <li id="shop_record">@Html.ActionLink("经销商录音下载", "ShopRecord", "Home")</li>
+        }
     </ul>
 
     using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("你好, " + User.Identity.Name.Split('|')[0].ToUpper() + " !", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
-    </ul>
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("你好, " + User.Identity.Name.Split('|')[0].ToUpper() + " !", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
+        </ul>
     }
 }
 else

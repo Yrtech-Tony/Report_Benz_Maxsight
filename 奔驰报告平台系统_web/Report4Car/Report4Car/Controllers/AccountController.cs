@@ -47,7 +47,7 @@ namespace Report4Car.Controllers
                     ReportService service = new ReportService();
                     string role = service.GetUserRole(model.UserName, "MB1602");
                     Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "MB1602", Year = "2016" };
-                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role, true, "");
+                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role+"|" + "MB1802", true, "");
                     if (Request.QueryString["ReturnUrl"] != null)
                         //跳转到登录前页面
                         return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
@@ -109,7 +109,7 @@ namespace Report4Car.Controllers
                     //return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
                 }
                 Session["user"] = new User() { ID = userId, Role = role, ProjectCode = barndAndQuarter, Year = year };
-                FormsAuthentication.SetAuthCookie(userId + "|" + role, true, "");
+                FormsAuthentication.SetAuthCookie(userId + "|" + role+"|"+ barndAndQuarter, true, "");
                 if (Request.QueryString["ReturnUrl"] != null)
                     //跳转到登录前页面
                     return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
