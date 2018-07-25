@@ -3381,14 +3381,21 @@ public class Service : System.Web.Services.WebService
     public void SaveUserInfoShop(string projectCode, string userId,string shopCode,string inUserId)
     {
         string sql = string.Format("EXEC UserInfoShop_S '{0}','{1}','{2}','{3}'",
-                                   projectCode, userId,shopCode,inUserId);
+                                   projectCode,shopCode,userId,inUserId);
         CommonHandler.query(sql);
     }
     [WebMethod]
-    public DataSet SearchUserInfoShop(string projectCode, string shopCode,string userId)
+    public DataSet SearchUserInfoShopList(string projectCode, string shopCode,string userId)
     {
         string sql = string.Format("EXEC UserInfoShop_R '{0}','{1}','{2}'",
                                    projectCode, shopCode,userId);
+        return CommonHandler.query(sql);
+    }
+    [WebMethod]
+    public DataSet SearchUserInfoAll(string projectCode)
+    {
+        string sql = string.Format("EXEC UserInfo_All_R '{0}'",
+                                   projectCode);
         return CommonHandler.query(sql);
     }
     #endregion
