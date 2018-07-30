@@ -16,6 +16,18 @@ namespace Report4Car.BENZReportServer {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BENZReportServer.ServiceSoap")]
     internal interface ServiceSoap {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadShopSubjectScore", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        void UploadShopSubjectScore(string projectCode, string shopCode, string subjectCode, string score, string lossDesc, string remark, string inUserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadAreaSubjectScore", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        void UploadAreaSubjectScore(string projectCode, string areaCode, string subjectCode, string score, string inUserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadSalesContantSubjectScore", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadSalesContantInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         void UploadSalesContantInfo(string projectCode, string shopCode, string salesType, string salesName, string score, string mustLoss, int orderNO_all, int orderNO_SmallArea, string inUserId);
@@ -416,7 +428,7 @@ namespace Report4Car.BENZReportServer {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        System.Data.DataSet SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode);
+        System.Data.DataSet SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode, string userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchReportDownShop_Group", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -502,7 +514,25 @@ namespace Report4Car.BENZReportServer {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        System.Data.DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode);
+        System.Data.DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode, string userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveUserInfoShop", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
+        void SaveUserInfoShop(string projectCode, string userId, string shopCode, string inUserId, char statusType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUserInfoShopList", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
+        System.Data.DataSet SearchUserInfoShopList(string projectCode, string shopCode, string userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchUserInfoAll", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
+        System.Data.DataSet SearchUserInfoAll(string projectCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DecryptString", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -545,24 +575,6 @@ namespace Report4Car.BENZReportServer {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
         void UploadShopCharterScore(string projectCode, string shopCode, string charterCode, string score, string excuteRate, string inUserId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadShopSubjectScore", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        void UploadShopSubjectScore(string projectCode, string shopCode, string subjectCode, string score, string lossDesc, string remark, string inUserId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadAreaSubjectScore", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        void UploadAreaSubjectScore(string projectCode, string areaCode, string subjectCode, string score, string inUserId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UploadSalesContantSubjectScore", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MarshalByRefObject))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PictureDto[]))]
-        void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchProjectNameAndCode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1808,7 +1820,7 @@ namespace Report4Car.BENZReportServer {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1868,7 +1880,7 @@ namespace Report4Car.BENZReportServer {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1887,7 +1899,7 @@ namespace Report4Car.BENZReportServer {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Image))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1905,7 +1917,7 @@ namespace Report4Car.BENZReportServer {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1942,7 +1954,7 @@ namespace Report4Car.BENZReportServer {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1988,7 +2000,7 @@ namespace Report4Car.BENZReportServer {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3215,6 +3227,18 @@ namespace Report4Car.BENZReportServer {
                 base(binding, remoteAddress) {
         }
         
+        public void UploadShopSubjectScore(string projectCode, string shopCode, string subjectCode, string score, string lossDesc, string remark, string inUserId) {
+            base.Channel.UploadShopSubjectScore(projectCode, shopCode, subjectCode, score, lossDesc, remark, inUserId);
+        }
+        
+        public void UploadAreaSubjectScore(string projectCode, string areaCode, string subjectCode, string score, string inUserId) {
+            base.Channel.UploadAreaSubjectScore(projectCode, areaCode, subjectCode, score, inUserId);
+        }
+        
+        public void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId) {
+            base.Channel.UploadSalesContantSubjectScore(projectCode, shopCode, subjectCode, salesType, salesName, score, inUserId);
+        }
+        
         public void UploadSalesContantInfo(string projectCode, string shopCode, string salesType, string salesName, string score, string mustLoss, int orderNO_all, int orderNO_SmallArea, string inUserId) {
             base.Channel.UploadSalesContantInfo(projectCode, shopCode, salesType, salesName, score, mustLoss, orderNO_all, orderNO_SmallArea, inUserId);
         }
@@ -3693,8 +3717,8 @@ namespace Report4Car.BENZReportServer {
             return base.Channel.SearchShopReport(smallAreaCode, userId, groupCode, projectCode);
         }
         
-        public System.Data.DataSet SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode) {
-            return base.Channel.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        public System.Data.DataSet SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode, string userId) {
+            return base.Channel.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode, userId);
         }
         
         public System.Data.DataSet SearchReportDownShop_Group(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode) {
@@ -3767,8 +3791,20 @@ namespace Report4Car.BENZReportServer {
             return base.Channel.SearchShopRecordUrlList(projectCode, shopCode);
         }
         
-        public System.Data.DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode) {
-            return base.Channel.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        public System.Data.DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupName, string carType, string projectCode, string userId) {
+            return base.Channel.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode, userId);
+        }
+        
+        public void SaveUserInfoShop(string projectCode, string userId, string shopCode, string inUserId, char statusType) {
+            base.Channel.SaveUserInfoShop(projectCode, userId, shopCode, inUserId, statusType);
+        }
+        
+        public System.Data.DataSet SearchUserInfoShopList(string projectCode, string shopCode, string userId) {
+            return base.Channel.SearchUserInfoShopList(projectCode, shopCode, userId);
+        }
+        
+        public System.Data.DataSet SearchUserInfoAll(string projectCode) {
+            return base.Channel.SearchUserInfoAll(projectCode);
         }
         
         public string DecryptString(string encryptString) {
@@ -3797,18 +3833,6 @@ namespace Report4Car.BENZReportServer {
         
         public void UploadShopCharterScore(string projectCode, string shopCode, string charterCode, string score, string excuteRate, string inUserId) {
             base.Channel.UploadShopCharterScore(projectCode, shopCode, charterCode, score, excuteRate, inUserId);
-        }
-        
-        public void UploadShopSubjectScore(string projectCode, string shopCode, string subjectCode, string score, string lossDesc, string remark, string inUserId) {
-            base.Channel.UploadShopSubjectScore(projectCode, shopCode, subjectCode, score, lossDesc, remark, inUserId);
-        }
-        
-        public void UploadAreaSubjectScore(string projectCode, string areaCode, string subjectCode, string score, string inUserId) {
-            base.Channel.UploadAreaSubjectScore(projectCode, areaCode, subjectCode, score, inUserId);
-        }
-        
-        public void UploadSalesContantSubjectScore(string projectCode, string shopCode, string subjectCode, string salesType, string salesName, string score, string inUserId) {
-            base.Channel.UploadSalesContantSubjectScore(projectCode, shopCode, subjectCode, salesType, salesName, score, inUserId);
         }
         
         public System.Data.DataSet SearchProjectNameAndCode() {

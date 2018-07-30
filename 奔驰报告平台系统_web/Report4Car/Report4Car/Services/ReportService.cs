@@ -104,9 +104,9 @@ namespace Report4Car.Services
         /// <param name="carType"></param>
         /// <param name="projectCode"></param>
         /// <returns></returns>
-        public DataTable SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode)
+        public DataTable SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode,string userId)
         {
-            DataSet ds = client.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode);
+            DataSet ds = client.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode,userId);
             if (ds.Tables.Count > 0)
                 return ds.Tables[0];
             return null;
@@ -142,9 +142,9 @@ namespace Report4Car.Services
         /// <param name="carType"></param>
         /// <param name="projectCode"></param>
         /// <returns></returns>
-        public DataTable SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode)
+        public DataTable SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode,string userId)
         {
-            DataSet ds = client.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode);
+            DataSet ds = client.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode,userId);
             if (ds.Tables.Count > 0)
                 return ds.Tables[0];
             return null;

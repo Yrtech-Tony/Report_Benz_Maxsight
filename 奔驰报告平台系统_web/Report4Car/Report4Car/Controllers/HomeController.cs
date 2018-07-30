@@ -359,7 +359,7 @@ namespace Report4Car.Controllers
             {
                 User user = Session["user"] as User;
                 DataTable dt1 = null;
-                dt1 = service.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
+                dt1 = service.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
                 object dic1 = DT2Obj.ToObj(dt1);
                 return Json(new { data1 = dic1 });
             }
@@ -384,13 +384,13 @@ namespace Report4Car.Controllers
                 switch (code)
                 {
                     case 1:
-                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
+                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
                         break;
                     case 2:
                         dt2 = service.SearchReportDownShop_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
                         break;
                     case 3:
-                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode);
+                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
                         dt2 = service.SearchReportDownShop_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
                         break;
                 }
