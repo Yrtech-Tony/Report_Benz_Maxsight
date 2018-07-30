@@ -3226,9 +3226,9 @@ public class Service : System.Web.Services.WebService
     #region 报告下载查询
     [WebMethod]
     public DataSet SearchReportDownShop_Area(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
-                                    string groupName, string carType, string projectCode)
+                                    string groupName, string carType, string projectCode,string userId)
     {
-        string sql = string.Format("exec [ShopReportByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        string sql = string.Format("exec [ShopReportByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode,userId);
         return CommonHandler.query(sql);
     }
     [WebMethod]
@@ -3367,9 +3367,9 @@ public class Service : System.Web.Services.WebService
     #region 经销商录音下载
     [WebMethod]
     public DataSet SearchShopRecord(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
-                                  string groupName, string carType, string projectCode)
+                                  string groupName, string carType, string projectCode,string userId)
     {
-        string sql = string.Format("exec [ShopRecordByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode);
+        string sql = string.Format("exec [ShopRecordByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode,userId);
         return CommonHandler.query(sql);
     }
     #endregion
