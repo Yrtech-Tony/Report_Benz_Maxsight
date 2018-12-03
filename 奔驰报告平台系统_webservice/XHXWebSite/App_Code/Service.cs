@@ -3373,7 +3373,33 @@ public class Service : System.Web.Services.WebService
         return CommonHandler.query(sql);
     }
     #endregion
-
+    #endregion
+    #region 经销商报告上传日期管理
+    #region 经销商报告上传日期设置
+    [WebMethod]
+    public void SaveShopReportUpload(string projectCode, string shopCode, string uploadDate, string uploadDate2, string userId)
+    {
+        string sql = string.Format("EXEC ShopReportUpload_S '{0}','{1}','{2}','{3}','{4}'",
+                                   projectCode, shopCode, uploadDate, uploadDate2, userId);
+        CommonHandler.query(sql);
+    }
+    [WebMethod]
+    public DataSet SearchShopReportUploadlList(string projectCode, string shopCode)
+    {
+        string sql = string.Format("EXEC ShopReportUpload_R '{0}','{1}'",
+                                   projectCode, shopCode);
+        return CommonHandler.query(sql);
+    }
+    #endregion
+    #region 经销商报告上传日期查询
+    [WebMethod]
+    public DataSet SearchShopReportUpload(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city,
+                                string groupName, string carType, string projectCode, string userId)
+    {
+        string sql = string.Format("exec [ShopReportUploadByArea_R] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}'", bigAreaCode, smallAreaCode, shopCode, province, city, groupName, carType, projectCode, userId);
+        return CommonHandler.query(sql);
+    }
+    #endregion
     #endregion
     #region 账号和经销商匹配管理
     #region 账号和经销商匹配设置
