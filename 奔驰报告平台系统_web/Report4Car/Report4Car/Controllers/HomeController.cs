@@ -193,6 +193,12 @@ namespace Report4Car.Controllers
             ViewBag.RoleType = (Session["user"] as User).Role;
             return View();
         }
+        public ActionResult ShopReportUpload()
+        {
+            ViewBag.TreeNode = getTreeviewData();
+            ViewBag.RoleType = (Session["user"] as User).Role;
+            return View();
+        }
         #endregion
 
         #region Treeview
@@ -360,6 +366,28 @@ namespace Report4Car.Controllers
                 User user = Session["user"] as User;
                 DataTable dt1 = null;
                 dt1 = service.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
+                object dic1 = DT2Obj.ToObj(dt1);
+                return Json(new { data1 = dic1 });
+            }
+            return null;
+        }
+        /// <summary>
+        /// 查询经销商报告上传时间
+        /// </summary>
+        /// <param name="groupCode"></param>
+        /// <param name="bigAreaCode"></param>
+        /// <param name="smallAreaCode"></param>
+        /// <param name="shopCode"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SearchShopReportUpload(string groupCode, string bigAreaCode, string smallAreaCode, string shopCode, int code)
+        {
+            if (Session["user"] != null)
+            {
+                User user = Session["user"] as User;
+                DataTable dt1 = null;
+                dt1 = service.SearchShopReportUpload(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode, user.ID);
                 object dic1 = DT2Obj.ToObj(dt1);
                 return Json(new { data1 = dic1 });
             }

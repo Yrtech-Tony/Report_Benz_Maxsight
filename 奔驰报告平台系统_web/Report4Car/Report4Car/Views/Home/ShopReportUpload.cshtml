@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "经销商录音下载";
+    ViewBag.Title = "报告上传时间";
 }
 @section scripts{
 
     <script type="text/javascript">
         var _flag = "@User.Identity.Name.Split('|')[1]";
         $(function () {
-            $('#shop_record').addClass('active');
+            $('#report_upload').addClass('active');
 
             switch (_flag) {
                 case "J":
@@ -170,7 +170,7 @@
         function fn_search_report(index) {
             $.ajax({
                 type: "post",
-                url: "@Url.Action("SearchShopRecord", "Home")",
+                url: "@Url.Action("SearchShopReportUpload", "Home")",
                 async: true,
                 dataType: "json",
                 data: { bigAreaCode: $("#bigArea").val(), smallAreaCode: $("#smallArea").val(), groupCode: $("#group").val(), shopCode: $("#shop").val(), code: 1 },
@@ -183,19 +183,15 @@
                         $(data.data1).each(function (index, item) {
                             var tr = $("<tr></tr>");
                             tr.append($("<td align='center'>" + parseInt(parseInt(index) + parseInt(1)) + "</td>"));
-                            tr.append($("<td align='center'>" + item.ShopCode + "</td>"));
-                            tr.append($("<td align='center'>" + item.ShopName + "</td>"));
-                            tr.append($("<td align='center'>" + item.SmallAreaCode + "</td>"));
+                            tr.append($("<td align='center'>" + item.ProjectCode + "</td>"));
+                            tr.append($("<td align='center'>" + item.ProjectName + "</td>"));
                             tr.append($("<td align='center'>" + item.BigAreaCode + "</td>"));
+                            tr.append($("<td align='center'>" + item.SmallAreaCode + "</td>"));
                             tr.append($("<td align='center'>" + item.GroupName.split(";")[0] + "</td>"));
-                            if (item.RecordUrl == "" || item.RecordUrl == null) {
-                                tr.append($('<td align="center"><a href="' + item.RecordUrl + '">录音未上传</a></td>'));
-                            }
-                            else {
-                                tr.append($('<td align="center"><a href="' + item.RecordUrl + '">下载录音</a></td>'));
-                            }
-                            tr.append($("<td align='center'>" + item.Password + "</td>"));
-                            tr.find("td").css("text-align: center;");
+                           // tr.append($("<td>" + item.ShopCode + "</td>"));
+                            tr.append($("<td align='center'>" + item.ShopName + "</td>"));
+                            tr.append($("<td align='center'>" + item.UploadDate + "</td>"));
+                            tr.find("td").css("text-align:center;");
                             tbody.append(tr);
                         });
                     }
@@ -222,7 +218,7 @@
                 {
 
                     <div class="row form-horizontal">
-                        <div class="col-md-4">
+                        <div class="col-md-4" >
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">集团</label>
                                 <div class="col-sm-9">
@@ -350,7 +346,7 @@
             }
         </div>
         <div class="title_header">
-            <h3>录音下载</h3>
+            <h3>报告上传时间</h3>
         </div>
         <div class="border_under_title">
             <div class="row">
@@ -359,13 +355,13 @@
                         <thead>
                             <tr>
                                 <td>序号</td>
-                                <td>经销商代码</td>
+                                <td>期次</td>
+                                <td>期次名称</td>
+                                <td>区域</td>
+                                <td>小区</td>
+                                <td>集团</td>
                                 <td>经销商名称</td>
-                                <td>所属小区</td>
-                                <td>所属大区</td>
-                                <td>所属集团</td>
-                                <td>下载</td>
-                                <td>密码</td>
+                                <td>报告上传日期</td>
                             </tr>
                         </thead>
                         <tbody></tbody>

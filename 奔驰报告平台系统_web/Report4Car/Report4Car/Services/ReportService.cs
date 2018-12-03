@@ -150,6 +150,26 @@ namespace Report4Car.Services
             return null;
         }
         /// <summary>
+        /// 查询经销商报告上传时间
+        /// </summary>
+        /// <param name="bigAreaCode"></param>
+        /// <param name="smallAreaCode"></param>
+        /// <param name="shopCode"></param>
+        /// <param name="province"></param>
+        /// <param name="city"></param>
+        /// <param name="groupCode"></param>
+        /// <param name="carType"></param>
+        /// <param name="projectCode"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public DataTable SearchShopReportUpload(string bigAreaCode, string smallAreaCode, string shopCode, string province, string city, string groupCode, string carType, string projectCode, string userId)
+        {
+            DataSet ds = client.SearchShopReportUpload(bigAreaCode, smallAreaCode, shopCode, province, city, groupCode, carType, projectCode, userId);
+            if (ds.Tables.Count > 0)
+                return ds.Tables[0];
+            return null;
+        }
+        /// <summary>
         /// 根据经销商查询经销商的得分情况
         /// </summary>
         /// <param name="projectCode"></param>
