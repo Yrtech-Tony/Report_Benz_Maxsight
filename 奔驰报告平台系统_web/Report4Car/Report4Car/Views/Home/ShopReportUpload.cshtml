@@ -183,7 +183,7 @@
                         $(data.data1).each(function (index, item) {
                             var tr = $("<tr></tr>");
                             tr.append($("<td align='center'>" + parseInt(parseInt(index) + parseInt(1)) + "</td>"));
-                            tr.append($("<td align='center'>" + item.ProjectCode + "</td>"));
+                            //tr.append($("<td align='center'>" + item.ProjectCode + "</td>"));
                             tr.append($("<td align='center'>" + item.ProjectName + "</td>"));
                             tr.append($("<td align='center'>" + item.BigAreaCode + "</td>"));
                             tr.append($("<td align='center'>" + item.SmallAreaCode + "</td>"));
@@ -356,7 +356,7 @@
                             <tr>
                                 <td>序号</td>
                                 <td>期次</td>
-                                <td>期次名称</td>
+                                @*<td>期次名称</td>*@
                                 <td>区域</td>
                                 <td>小区</td>
                                 <td>集团</td>
