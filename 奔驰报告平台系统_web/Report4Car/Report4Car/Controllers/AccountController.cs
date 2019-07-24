@@ -45,9 +45,9 @@ namespace Report4Car.Controllers
                 try
                 {
                     ReportService service = new ReportService();
-                    string role = service.GetUserRole(model.UserName, "MB1803");
-                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "MB1803", Year = "2018" };
-                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role+"|" + "MB1803", true, "");
+                    string role = service.GetUserRole(model.UserName, "MB1804");
+                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "MB1804", Year = "2018" };
+                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role + "|" + "MB1804", true, "");
                     if (Request.QueryString["ReturnUrl"] != null)
                         //跳转到登录前页面
                         return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
@@ -57,6 +57,7 @@ namespace Report4Car.Controllers
                 catch (Exception ex)
                 {
                     ViewBag.Message = ex.InnerException.ToString();
+                    log(ex.InnerException.ToString());
                 }
             }
             else
@@ -86,8 +87,12 @@ namespace Report4Car.Controllers
                 {
                     count = user[3];
                 }
-                // 2015之前的命名规则和之后的规则不同，所以分开进行处理
-                if (year != "2015")
+                // 2015之前的命名规则和之后的规则不同，所以分开进行处理,2015年不处理
+                if (year == "2015")
+                {
+
+                }
+                else if (year == "2016" || year == "2017" || year == "2018")
                 {
                     if (barndAndQuarter.ToUpper().Contains("MBH"))
                     {
@@ -102,6 +107,21 @@ namespace Report4Car.Controllers
                         barndAndQuarter = barndAndQuarter.Insert(3, year.Substring(2, 2)) + count;
                     }
                 }
+                else
+                {
+                    if (barndAndQuarter.ToUpper().Contains("MBH"))
+                    {
+                        barndAndQuarter = barndAndQuarter.Substring(0,3)+year.Substring(2,2)+ "R"+barndAndQuarter.Substring(barndAndQuarter.Length-1);
+                    }
+                    else if (barndAndQuarter.ToUpper().Contains("MB"))
+                    {
+                        barndAndQuarter = barndAndQuarter.Substring(0, 2) + year.Substring(2, 2) + "R" + barndAndQuarter.Substring(barndAndQuarter.Length - 1);
+                    }
+                    else if (barndAndQuarter.ToUpper().Contains("VAN"))
+                    {
+                        barndAndQuarter = barndAndQuarter.Substring(0, 3) + year.Substring(2, 2) + "R" + barndAndQuarter.Substring(barndAndQuarter.Length - 1);
+                    }
+                }
                 ReportService service = new ReportService();
                 string role = service.GetUserRole(userId, barndAndQuarter);
                 if (role == "Other")
@@ -109,7 +129,7 @@ namespace Report4Car.Controllers
                     //return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
                 }
                 Session["user"] = new User() { ID = userId, Role = role, ProjectCode = barndAndQuarter, Year = year };
-                FormsAuthentication.SetAuthCookie(userId + "|" + role+"|"+ barndAndQuarter, true, "");
+                FormsAuthentication.SetAuthCookie(userId + "|" + role + "|" + barndAndQuarter, true, "");
                 if (Request.QueryString["ReturnUrl"] != null)
                     //跳转到登录前页面
                     return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
