@@ -3477,10 +3477,10 @@ public class Service : System.Web.Services.WebService
     }
     [WebMethod]
     public void UploadShopScore(string projectCode, string shopCode, string score, int orderNO_All, int orderNO_BigArea, int orderNO_SmallArea
-                                    , string mustLoss, string inUserId, string saleContant)
+                                  , string mustLoss, string inUserId, string saleContant, string serviceConvention)
     {
-        string sql = string.Format("exec [Upload_ShopScoreInfo_S] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}'",
-                                        projectCode, shopCode, score, orderNO_All, orderNO_BigArea, orderNO_SmallArea, mustLoss, inUserId, saleContant);
+        string sql = string.Format("exec [Upload_ShopScoreInfo_S] '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'",
+                                        projectCode, shopCode, score, orderNO_All, orderNO_BigArea, orderNO_SmallArea, mustLoss, inUserId, saleContant, serviceConvention);
         CommonHandler.query(sql);
     }
     [WebMethod]
