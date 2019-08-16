@@ -77,6 +77,7 @@ namespace Report4Car.Controllers
         {
             try
             {
+               
                 string info = DecryptString(id);
                 String[] user = info.Split('|');
                 String barndAndQuarter = user[0];
@@ -105,6 +106,7 @@ namespace Report4Car.Controllers
                     else if (barndAndQuarter.ToUpper().Contains("VAN"))
                     {
                         barndAndQuarter = barndAndQuarter.Insert(3, year.Substring(2, 2)) + count;
+                        log(id + " " + barndAndQuarter +  " " + year + " " + " " + userId);
                     }
                 }
                 else

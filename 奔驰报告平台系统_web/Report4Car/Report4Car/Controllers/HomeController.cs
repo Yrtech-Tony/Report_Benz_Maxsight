@@ -25,7 +25,7 @@ namespace Report4Car.Controllers
         public static void log(string message)
         {
             string appDomainPath = AppDomain.CurrentDomain.BaseDirectory;
-            string fileName = appDomainPath + @"\" + "Log" + @"\" + DateTime.Now.ToString("yyyyMMdd") + @"\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+            string fileName = appDomainPath + @"\" + "Log" + @"\" + DateTime.Now.ToString("yyyyMMdd") + @"\" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".txt";
             //File.Create(fileName);
             if (!Directory.Exists(appDomainPath + @"\" + "Log"))
             {
@@ -365,7 +365,7 @@ namespace Report4Car.Controllers
             {
                 User user = Session["user"] as User;
                 DataTable dt1 = null;
-                dt1 = service.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
+                dt1 = service.SearchShopRecord(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode, user.ID);
                 object dic1 = DT2Obj.ToObj(dt1);
                 return Json(new { data1 = dic1 });
             }
@@ -412,13 +412,13 @@ namespace Report4Car.Controllers
                 switch (code)
                 {
                     case 1:
-                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
+                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode, user.ID);
                         break;
                     case 2:
                         dt2 = service.SearchReportDownShop_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
                         break;
                     case 3:
-                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode,user.ID);
+                        dt1 = service.SearchReportDownShop_Area(bigAreaCode, smallAreaCode, shopCode, "", "", "", "", user.ProjectCode, user.ID);
                         dt2 = service.SearchReportDownShop_Group("", "", shopCode, "", "", groupCode, "", user.ProjectCode);
                         break;
                 }
@@ -616,7 +616,7 @@ namespace Report4Car.Controllers
         [HttpPost]
         public ActionResult DownloadCheckedFiles(string shops, string projects)
         {
-
+            log(shops + " " + projects);
             if (string.IsNullOrEmpty(shops) || string.IsNullOrEmpty(projects))
                 return null;
             if (shops.LastIndexOf(',') == shops.Length - 1)
@@ -631,7 +631,18 @@ namespace Report4Car.Controllers
             {
                 string reportPath = HttpContext.Server.MapPath("~/ReportFiles");
                 //temp = Path.Combine(reportPath, "TEMP\\temp.zip");
-                temp = Path.Combine(reportPath, "TEMP\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".zip");
+                if (shopList.Count > 1)
+                {
+                    temp = Path.Combine(reportPath, "TEMP\\" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".zip");
+                }
+                else if (shopList.Count > 0)
+                {
+                    temp = Path.Combine(reportPath, "TEMP\\" + shopList[0]+ DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".zip");
+                }
+                else
+                {
+                    temp = Path.Combine(reportPath, "TEMP\\" + "error"+ DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".zip");
+                }
 
 
                 ZipInForFiles(shopList, projectList, reportPath, temp, 9);
