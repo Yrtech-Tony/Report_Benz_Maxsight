@@ -45,9 +45,9 @@ namespace Report4Car.Controllers
                 try
                 {
                     ReportService service = new ReportService();
-                    string role = service.GetUserRole(model.UserName, "MB1804");
-                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "MB1804", Year = "2018" };
-                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role + "|" + "MB1804", true, "");
+                    string role = service.GetUserRole(model.UserName, "VAN180302");
+                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "VAN180302", Year = "2018" };
+                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role + "|" + "VAN180302", true, "");
                     if (Request.QueryString["ReturnUrl"] != null)
                         //跳转到登录前页面
                         return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));

@@ -39,6 +39,10 @@
                             tr.append($("<td style='text-align: center;'>" + this.Score + "</td>"));
                             tr.append($("<td style='text-align: center;'>" + this.OrderNO_SmallArea + "</td>"));
                             tr.append($("<td style='text-align: center;'>" + this.OrderNO_All + "</td>"));
+                            if ("@ViewBag.Type" == "MB1" ||"@ViewBag.Type" == "MB2"|| "@ViewBag.Type" == "MBH")
+                            {
+                                tr.append($("<td style='text-align: center;'>" + this.ServiceConvention + "</td>"));
+                            }
                             tbody.append(tr);
                         });
                     }
@@ -220,6 +224,10 @@
                         <td>经销商得分</td>
                         <td>小区内排名</td>
                         <td>全国排名</td>
+                        @if (@ViewBag.Type == "MB1"|| @ViewBag.Type == "MB2" || @ViewBag.Type == "MBH")
+                        {
+                            <td>服务公约</td>
+                        }
                     </tr>
                 </thead>
                 <tbody></tbody>

@@ -11,7 +11,11 @@
         <li id="distributor">@Html.ActionLink("经销商报告", "DistributorReport", "Home")</li>
         <li id="report_download">@Html.ActionLink("经销商报告下载", "ReportDownload", "Home")</li>
         <li id="report_upload">@Html.ActionLink("报告上传时间", "ShopReportUpload", "Home")</li>
-        @if (User.Identity.Name.Split('|')[2].Substring(0,3) == "MB1") // 只有MB的时候才显示这个菜单
+        @if (User.Identity.Name.Split('|')[2].Substring(0, 3) == "VAN") // 只有MB的时候才显示这个菜单
+        { }
+        else if (User.Identity.Name.Split('|')[2].Substring(0, 3) == "MBH")
+        { }
+        else if (User.Identity.Name.Split('|')[2].Substring(0, 3) == "MB1" || User.Identity.Name.Split('|')[2].Substring(0, 3) == "MB2")
         {
             <li id="shop_record">@Html.ActionLink("经销商录音下载", "ShopRecord", "Home")</li>
         }

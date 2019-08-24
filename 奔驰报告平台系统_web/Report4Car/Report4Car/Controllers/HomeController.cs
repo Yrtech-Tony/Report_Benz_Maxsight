@@ -158,6 +158,7 @@ namespace Report4Car.Controllers
 
                 ViewBag.ProjectCode = user.ProjectCode;
                 ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", project.Quarter);
+                ViewBag.Type = type;
                 //if (type.ToUpper() == "VAN")
                 //{
                 //    ViewBag.ForNo = String.Format("第 {0} 季度经销商报告", project.Quarter);
