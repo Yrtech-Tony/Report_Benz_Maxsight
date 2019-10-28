@@ -697,7 +697,7 @@ namespace Report4Car.Controllers
                 {
                     projectCodeFile = "20" + projectCode.Substring(2, 2) + "Q" + projectCode.Substring(5, 1);
                 }
-                else if (projectCode.ToUpper().Contains("VAN"))
+                else if (projectCode.ToUpper().Contains("VAN")|| projectCode.ToUpper().Contains("COC"))
                 {
                     projectCodeFile = "20" + projectCode.Substring(3, 2) + "Q" + projectCode.Substring(6, 1);
                 }
@@ -925,7 +925,7 @@ namespace Report4Car.Controllers
                         {
                             projectCodeFile = "20" + folder.Substring(2, 2) + "Q" + folder.Substring(5, 1);
                         }
-                        else if (folder.ToUpper().Contains("VAN"))
+                        else if (folder.ToUpper().Contains("VAN")|| folder.ToUpper().Contains("COC"))
                         {
                             projectCodeFile = "20" + folder.Substring(3, 2) + "Q" + folder.Substring(6, 1);
                         }

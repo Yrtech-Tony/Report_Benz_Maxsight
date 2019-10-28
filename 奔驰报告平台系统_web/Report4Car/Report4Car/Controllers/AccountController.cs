@@ -45,9 +45,9 @@ namespace Report4Car.Controllers
                 try
                 {
                     ReportService service = new ReportService();
-                    string role = service.GetUserRole(model.UserName, "VAN180302");
-                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "VAN180302", Year = "2018" };
-                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role + "|" + "VAN180302", true, "");
+                    string role = service.GetUserRole(model.UserName, "COC19R1");
+                    Session["user"] = new User() { ID = model.UserName, Role = role, ProjectCode = "COC19R1", Year = "2019" };
+                    FormsAuthentication.SetAuthCookie(model.UserName + "|" + role + "|" + "COC19R1", true, "");
                     if (Request.QueryString["ReturnUrl"] != null)
                         //跳转到登录前页面
                         return Redirect(HttpUtility.UrlDecode(Request.QueryString["ReturnUrl"]));
@@ -106,23 +106,24 @@ namespace Report4Car.Controllers
                     else if (barndAndQuarter.ToUpper().Contains("VAN"))
                     {
                         barndAndQuarter = barndAndQuarter.Insert(3, year.Substring(2, 2)) + count;
-                        log(id + " " + barndAndQuarter +  " " + year + " " + " " + userId);
+                       // log(id + " " + barndAndQuarter +  " " + year + " " + " " + userId);
                     }
                 }
                 else
                 {
                     if (barndAndQuarter.ToUpper().Contains("MBH"))
                     {
-                        barndAndQuarter = barndAndQuarter.Substring(0,3)+year.Substring(2,2)+ "R"+barndAndQuarter.Substring(barndAndQuarter.Length-1);
+                        barndAndQuarter = barndAndQuarter.Substring(0,3) + year.Substring(2,2)+ "R"+barndAndQuarter.Substring(barndAndQuarter.Length-1);
                     }
                     else if (barndAndQuarter.ToUpper().Contains("MB"))
                     {
                         barndAndQuarter = barndAndQuarter.Substring(0, 2) + year.Substring(2, 2) + "R" + barndAndQuarter.Substring(barndAndQuarter.Length - 1);
                     }
-                    else if (barndAndQuarter.ToUpper().Contains("VAN"))
+                    else if (barndAndQuarter.ToUpper().Contains("VAN")|| barndAndQuarter.ToUpper().Contains("COC"))
                     {
                         barndAndQuarter = barndAndQuarter.Substring(0, 3) + year.Substring(2, 2) + "R" + barndAndQuarter.Substring(barndAndQuarter.Length - 1);
                     }
+                   
                 }
                 ReportService service = new ReportService();
                 string role = service.GetUserRole(userId, barndAndQuarter);
